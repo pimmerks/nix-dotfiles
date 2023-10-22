@@ -38,6 +38,8 @@
     # QT Wayland support
     #qt5-wayland
     #qt6-wayland
+
+    kitty
   ];
 
   security.pam.services.swaylock = {};
