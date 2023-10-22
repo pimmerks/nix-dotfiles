@@ -9,6 +9,7 @@
   users.users.${user}.shell = pkgs.zsh;
 
   environment.sessionVariables.HIST_STAMPS = "yyyy-mm-dd";
+  environment.sessionVariables.COMPLETION_WAITING_DOTS = "true";
 
   programs.zsh = {
     enable = true;
