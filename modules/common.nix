@@ -9,7 +9,6 @@
     wget
     git
     tmux
-    git
     jq
     yq
     tree
