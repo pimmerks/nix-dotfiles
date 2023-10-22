@@ -19,4 +19,6 @@ darwin-rebuild switch --flake .#Pims-MacBook-Pro
 ```
 
 ### NixOS
-todo
+```shell
+sudo nixos-rebuild switch --flake .#lin0
+```

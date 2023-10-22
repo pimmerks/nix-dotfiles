@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    # Editors / tools
+    jetbrains.goland
+    jetbrains.webstorm
+    vscode
+    insomnia
+
     ### Languages
 
     # Golang
