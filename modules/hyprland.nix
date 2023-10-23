@@ -40,6 +40,11 @@
     #qt6-wayland
 
     kitty
+
+    # File browsing
+    gnome.nautilus
+    gnome.file-roller
+    gnome.eog
   ];
 
   security.pam.services.swaylock = {};
