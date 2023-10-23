@@ -18,15 +18,21 @@
     killall
     neofetch
     fzf # Command line fuzzy finder (also used in zsh)
+    unzip
 
     kitty
 
     home-manager
+
+    # Programs I use:
+    spotify
+    discord
+    signal-desktop
   ];
 
-  # # Install fonts
-  # fonts.packages = with pkgs; [
-  #   font-awesome
-  #   (nerdfonts.override { fonts = [ "Meslo" "FiraCode" "JetBrainsMono" ]; })
-  # ];
+  # Install fonts
+  fonts.packages = with pkgs; [
+    font-awesome
+    (nerdfonts.override { fonts = [ "Meslo" "FiraCode" "JetBrainsMono" ]; })
+  ];
 }
