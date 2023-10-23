@@ -18,6 +18,12 @@
     killall
     neofetch
     fzf # Command line fuzzy finder (also used in zsh)
+    unzip
+
+    # Programs I use:
+    spotify
+    discord
+    signal-desktop
   ];
 
   # Install fonts
