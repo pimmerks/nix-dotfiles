@@ -4,6 +4,8 @@
     isNormalUser = true;
     description = "${user}";
     extraGroups = [ "networkmanager" "wheel" ];
-    # packages = with pkgs; [];
+    packages = with pkgs; [
+      firefox
+    ];
   };
 }
