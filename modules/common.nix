@@ -24,6 +24,7 @@
     spotify
     discord
     signal-desktop
+    chromium
   ];
 
   # Install fonts

@@ -13,6 +13,8 @@
     go_1_21
     golangci-lint
     goose
+    gcc
+    libcap
 
     # NodeJS
     nodejs_20
