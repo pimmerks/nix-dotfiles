@@ -26,8 +26,12 @@ darwin-rebuild switch --flake .#Pims-MacBook-Pro
 sudo nixos-rebuild switch --flake .#lin0
 ```
 
-## Updating lock file
+### Updating programs
+
+Updating the nix lock file result in updated installed apps.
 
 ```shell
-nix flake update
+nix flake update --commit-lock-file
 ```
+
+After this, you have to rebuild your NixOS config, as seen above.

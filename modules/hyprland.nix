@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, user, homeDir, ... }:
 {
   programs.hyprland = {
     enable = true;
@@ -35,6 +35,9 @@
     xdg-desktop-portal-hyprland
     dbus
 
+    # Authentication agent
+    libsForQt5.polkit-kde-agent
+
     # QT Wayland support
     #qt5-wayland
     #qt6-wayland
@@ -44,7 +47,9 @@
     # File browsing
     gnome.nautilus
     gnome.file-roller
-    gnome.eog
+    gnome.eog # Image viewer
+    gnome.gnome-font-viewer
+    gnome.gnome-calculator
   ];
 
   security.pam.services.swaylock = {};

@@ -57,6 +57,7 @@
       ];
       specialArgs = {
         user = "pimmer";
+        homeDir = "/Users/pimmer";
         inherit self inputs outputs;
       };
     };
@@ -80,7 +81,24 @@
 
       specialArgs = {
         user = "pimmer";
+        homeDir = "/home/pimmer";
         inherit self inputs outputs;
+      };
+    };
+
+    homeConfigurations = {
+      "pimmer@lin0" = lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+        modules = [
+          hyprland.homeManagerModules.default
+        ];
+
+        specialArgs = {
+          user = "pimmer";
+          homeDir = "/home/pimmer";
+          inherit self inputs outputs;
+        };
       };
     };
 
