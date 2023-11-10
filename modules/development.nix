@@ -18,6 +18,7 @@
 
     # NodeJS
     nodejs_20
+    bun
 
     # Python
     python312
