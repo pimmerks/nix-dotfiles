@@ -18,6 +18,8 @@
     killall
     neofetch
     fzf # Command line fuzzy finder (also used in zsh)
+
+    kitty
   ];
 
   # # Install fonts
