@@ -32,6 +32,8 @@
     darwinConfigurations."Pims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [
         ./hosts/Pims-MacBook-Pro/configuration.nix
+        ./modules/common.nix
+        ./modules/cli_tools.nix
       ];
       specialArgs = {
         user = "pimmer";

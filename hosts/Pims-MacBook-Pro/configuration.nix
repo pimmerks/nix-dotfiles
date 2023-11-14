@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, self, ... }:
 {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -16,4 +16,6 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "x86_64-darwin";
+
+  programs.zsh.enable = true;
 }

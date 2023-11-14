@@ -1,24 +1,11 @@
 { config, pkgs, ... }:
 {
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
-    # Editors / tools
-    jetbrains.goland
-    jetbrains.webstorm
-    vscode
-    insomnia
-
-    ### Languages
-
-    # Golang
-    go_1_21
-    golangci-lint
-    goose
-
-    # NodeJS
-    nodejs_20
-
-    # Python
-    python312
+    git
 
     ### Tools
     gnumake
