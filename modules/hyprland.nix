@@ -50,6 +50,9 @@
     gnome.eog # Image viewer
     gnome.gnome-font-viewer
     gnome.gnome-calculator
+
+    # Misc
+    mangohud
   ];
 
   security.pam.services.swaylock = {};
