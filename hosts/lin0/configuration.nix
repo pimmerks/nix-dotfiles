@@ -108,11 +108,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # # Others
-    # _1password
-    # _1password-gui
-    # discord
-    # spotify
+    cifs-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
