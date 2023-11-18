@@ -29,7 +29,6 @@
     discord
     signal-desktop
     chromium
-    steam
   ];
 
   # Install fonts

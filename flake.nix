@@ -77,6 +77,7 @@
         ./modules/development.nix
         ./modules/docker.nix
         ./modules/1password.nix
+        ./modules/gaming.nix
       ];
 
       specialArgs = {
