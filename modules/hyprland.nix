@@ -1,7 +1,15 @@
 { config, pkgs, user, homeDir, ... }:
 {
-  programs.hyprland = {
-    enable = true;
+
+  nix.settings = {
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+  };
+
+  programs = {
+    hyprland = {
+      enable = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -44,12 +52,13 @@
 
     kitty
 
-    # File browsing
+    # File browsing + Gnome stuff
     gnome.nautilus
     gnome.file-roller
     gnome.eog # Image viewer
     gnome.gnome-font-viewer
     gnome.gnome-calculator
+    gnome.gnome-system-monitor
 
     # Misc
     mangohud
