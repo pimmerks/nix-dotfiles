@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, user, nix-stable, ... }:
 {
   # Add user to libvirtd group
   users.users.${user}.extraGroups = [ "libvirtd" ];
@@ -7,7 +7,7 @@
   programs.virt-manager.enable = true;
 
   # Install necessary packages
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs.stable; [
     virt-manager
     virt-viewer
     spice

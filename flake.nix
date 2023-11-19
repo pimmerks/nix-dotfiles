@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-stable.url = "nixpkgs/nixos-23.05";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -20,10 +21,13 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, hyprland }:
+  outputs = inputs@{ self, nixpkgs, nix-stable, nix-darwin, home-manager, hyprland }:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
+    overlay-stable = final: prev: {
+      stable = nix-stable.legacyPackages.${prev.system};
+    };
   in {
     inherit lib;
 
@@ -70,6 +74,9 @@
     # $ nixos-rebuild build --flake .#lin0
     nixosConfigurations."lin0" = lib.nixosSystem {
       modules = [
+        # Overlays-module makes "pkgs.stable" available in configuration.nix
+        ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
+
         ./hosts/lin0/configuration.nix
         ./modules/common.nix
         ./modules/shell.nix
@@ -84,6 +91,7 @@
       specialArgs = {
         user = "pimmer";
         homeDir = "/home/pimmer";
+        nix-stable = nix-stable;
         inherit self inputs outputs;
       };
     };

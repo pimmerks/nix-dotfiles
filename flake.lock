@@ -111,6 +111,21 @@
         "type": "github"
       }
     },
+    "nix-stable": {
+      "locked": {
+        "lastModified": 1700272409,
+        "narHash": "sha256-Mge6iOvomplBsvQ47sIeVAwAUGSVXH4qCW4pLUt/qMI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "8e5e424b1c059e9ccf5db6a652458e30de05fa3a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-23.05",
+        "type": "indirect"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1707546158,
@@ -132,6 +147,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nix-darwin": "nix-darwin",
+        "nix-stable": "nix-stable",
         "nixpkgs": "nixpkgs"
       }
     },
