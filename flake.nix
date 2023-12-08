@@ -96,12 +96,12 @@
       };
     };
 
-    homeConfigurations = {
-      "pimmer@lin0" = lib.homeManagerConfiguration {
+    homeConfigurations."pimmer@lin0" = lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
         modules = [
           hyprland.homeManagerModules.default
+          ./home
         ];
 
         specialArgs = {
