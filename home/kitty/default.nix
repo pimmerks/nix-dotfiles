@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, user, ... }:
 {
-  programs.kitty = {
+  config.home-manager.users.${user}.programs.kitty = {
     enable = true;
     settings = {
       scrollback_lines = 10000;
@@ -29,38 +29,38 @@
       kitty_mod = "ctrl+shift";
     };
 
-    keybindings = {
-      "kitty_mod+c" = "copy_to_clipboard"
-      "cmd+c" = "copy_to_clipboard"
+    # keybindings = {
+    #   "kitty_mod+c" = "copy_to_clipboard"
+    #   "cmd+c" = "copy_to_clipboard"
 
-      "kitty_mod+v" = "paste_from_clipboard"
-      "cmd+v" = "paste_from_clipboard"
+    #   "kitty_mod+v" = "paste_from_clipboard"
+    #   "cmd+v" = "paste_from_clipboard"
 
-      "kitty_mod+right" = "next_tab"
-      "cmd+right" = "next_tab"
+    #   "kitty_mod+right" = "next_tab"
+    #   "cmd+right" = "next_tab"
 
-      "kitty_mod+left" = "previous_tab"
-      "cmd+left" = "previous_tab"
+    #   "kitty_mod+left" = "previous_tab"
+    #   "cmd+left" = "previous_tab"
 
-      "kitty_mod+t" = "new_tab"
-      "cmd+t" = "new_tab"
+    #   "kitty_mod+t" = "new_tab"
+    #   "cmd+t" = "new_tab"
 
-      "kitty_mod+q" = "close_tab"
-      "cmd+w" = "close_tab"
+    #   "kitty_mod+q" = "close_tab"
+    #   "cmd+w" = "close_tab"
 
-      "kitty_mod+l" = "next_layout"
+    #   "kitty_mod+l" = "next_layout"
 
-      "cmd+1" = "goto_tab 1"
-      "cmd+2" = "goto_tab 2"
-      "cmd+3" = "goto_tab 3"
-      "cmd+4" = "goto_tab 4"
-      "cmd+5" = "goto_tab 5"
-      "cmd+6" = "goto_tab 6"
-      "cmd+7" = "goto_tab 7"
-      "cmd+8" = "goto_tab 8"
-      "cmd+9" = "goto_tab 9"
-      "cmd+0" = "goto_tab 10"
-    };
+    #   "cmd+1" = "goto_tab 1"
+    #   "cmd+2" = "goto_tab 2"
+    #   "cmd+3" = "goto_tab 3"
+    #   "cmd+4" = "goto_tab 4"
+    #   "cmd+5" = "goto_tab 5"
+    #   "cmd+6" = "goto_tab 6"
+    #   "cmd+7" = "goto_tab 7"
+    #   "cmd+8" = "goto_tab 8"
+    #   "cmd+9" = "goto_tab 9"
+    #   "cmd+0" = "goto_tab 10"
+    # };
 
 
   };
