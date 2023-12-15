@@ -28,7 +28,7 @@
     overlay-stable = final: prev: {
       stable = nix-stable.legacyPackages.${prev.system};
     };
-  in {
+  in rec {
     inherit lib;
 
     # Build darwin flake using:
@@ -55,6 +55,8 @@
         # Overlays-module makes "pkgs.stable" available in configuration.nix
         ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
 
+        # home-manager.nixosModules.home-manager
+
         ./hosts/lin0/configuration.nix
         ./modules/common.nix
         ./modules/shell.nix
@@ -64,6 +66,8 @@
         ./modules/1password.nix
         ./modules/gaming.nix
         ./modules/virtualisation.nix
+
+#        ./home
       ];
 
       specialArgs = {
@@ -74,19 +78,7 @@
       };
     };
 
-    homeConfigurations."pimmer@lin0" = lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-      modules = [
-        hyprland.homeManagerModules.default
-        ./home
-      ];
-
-      specialArgs = {
-        user = "pimmer";
-        homeDir = "/home/pimmer";
-        inherit self inputs outputs;
-      };
-    };
+    ## Home configurations
+    homeConfigurations."pimmer@lin0" = nixosConfigurations."lin0".config.home-manager.users."pimmer".home;
   };
 }
