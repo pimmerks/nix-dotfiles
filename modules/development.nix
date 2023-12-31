@@ -35,6 +35,7 @@
     # CLI
     glab # Gitlab cli
     awscli2 # AWS
+    aws-iam-authenticator
     gh
     dapr-cli
     argocd
