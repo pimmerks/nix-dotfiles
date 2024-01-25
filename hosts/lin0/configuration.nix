@@ -109,6 +109,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     cifs-utils
+
+    # Emails:
+    betterbird
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -131,6 +134,8 @@
   networking.firewall.allowedUDPPorts = [
     5353 # Spotify local discovery
   ];
+
+  services.tailscale.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
