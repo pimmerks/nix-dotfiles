@@ -40,6 +40,7 @@
     gh
     dapr-cli
     argocd
+    supabase-cli
 
     # Kubernetes
     kubectl

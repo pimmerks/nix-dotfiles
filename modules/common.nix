@@ -21,6 +21,7 @@
     unzip
     gotop
     home-manager
+    dig
 
     kitty
 
