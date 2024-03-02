@@ -9,22 +9,8 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./users.nix
+    ./bootloader.nix
   ];
-
-  # Bootloader.
-  boot = {
-    supportedFilesystems = [ "ntfs" ];
-    initrd = { kernelModules = [ "nvidia" ]; };
-    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-      };
-      systemd-boot = {
-        enable = true;
-      };
-    };
-  };
 
   networking.hostName = "lin0"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -67,6 +53,8 @@
       layout = "us";
     };
   };
+
+  hardware.opengl.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
