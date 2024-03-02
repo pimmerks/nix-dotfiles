@@ -1,6 +1,5 @@
-{ config, pkgs, user, homeDir, ... }:
+{ config, lib, pkgs, user, homeDir, ... }:
 {
-
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
@@ -9,6 +8,19 @@
   programs = {
     hyprland = {
       enable = true;
+    };
+  };
+
+  # greeter
+  services.xserver.displayManager.gdm.enable = lib.mkForce false;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --power-shutdown 'systemctl poweroff -i' --power-reboot 'systemctl reboot' --cmd Hyprland";
+        #command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}";
+        user = "greeter";
+      };
     };
   };
 
