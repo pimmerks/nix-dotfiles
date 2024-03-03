@@ -41,6 +41,7 @@
     dapr-cli
     argocd
     supabase-cli
+    stripe-cli
 
     # Kubernetes
     kubectl
