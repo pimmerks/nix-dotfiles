@@ -49,6 +49,7 @@
         ./modules/cli_tools.nix
 
         ./modules/development
+        ./modules/terminal.nix
 
         ./modules/apps/spotify.nix
       ];
