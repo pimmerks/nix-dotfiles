@@ -43,6 +43,7 @@
 
      # New MBP M3 - Arm chip
     darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
       modules = [
         ./hosts/Pims-MBP/configuration.nix
         ./modules/common.nix
@@ -52,6 +53,7 @@
         ./modules/terminal.nix
 
         ./modules/apps/spotify.nix
+
       ];
       specialArgs = {
         user = "pimmer";
@@ -60,7 +62,7 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-     darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
+    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
 
     # Main desktop
     # Build darwin flake using:
@@ -79,6 +81,24 @@
       specialArgs = {
         user = "pimmer";
         inherit self inputs outputs;
+      };
+    };
+
+    homeConfigurations = {
+      "pimmer@Pims-MBP" = home-manager.lib.homeManagerConfiguration {
+        # Note: I am sure this could be done better with flake-utils or something
+        pkgs = import nixpkgs { system = "aarch64-darwin"; };
+
+        modules = [
+          {
+            home = {
+              username = "pimmer";
+              homeDirectory = "/Users/pimmer";
+              stateVersion = "23.11";
+            };
+          }
+          ./home/shell.nix
+        ]; # Defined later
       };
     };
   };

@@ -20,6 +20,8 @@
     fzf # Command line fuzzy finder (also used in zsh)
 
     kitty
+
+    home-manager
   ];
 
   # # Install fonts
