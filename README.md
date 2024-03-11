@@ -11,7 +11,7 @@ Clone the repository and, depending on the system, execute the following command
 First time, install `nix-darwin` with:
 
 ```shell
-nix --extra-experimental-features 'nix-command flakes'  run nix-darwin -- switch --flake .#Pims-MacBook-Pro
+nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#Pims-MacBook-Pro
 ```
 
 After `nix-darwin` is installed, you're able to run `darwin-rebuild` to rebuild the system.

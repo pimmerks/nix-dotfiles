@@ -41,8 +41,23 @@
       };
     };
 
+     # New MBP M3 - Arm chip
+    darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
+      modules = [
+        ./hosts/Pims-MBP/configuration.nix
+        ./modules/common.nix
+        ./modules/cli_tools.nix
+
+        ./modules/apps/spotify.nix
+      ];
+      specialArgs = {
+        user = "pimmer";
+        inherit self inputs outputs;
+      };
+    };
+
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Pims-MacBook-Pro".pkgs;
+     darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
 
     # Main desktop
     # Build darwin flake using:
