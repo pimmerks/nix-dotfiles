@@ -48,6 +48,8 @@
         ./modules/common.nix
         ./modules/cli_tools.nix
 
+        ./modules/development
+
         ./modules/apps/spotify.nix
       ];
       specialArgs = {
