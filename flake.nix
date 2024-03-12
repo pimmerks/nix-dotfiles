@@ -99,7 +99,8 @@
           }
           ./home/shell.nix
           ./home/kitty.nix
-        ]; # Defined later
+          ./home/neovim.nix
+        ];
       };
     };
   };

@@ -9,9 +9,9 @@
     pkgs.fasd
   ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+#  home.sessionVariables = {
+#    EDITOR = "nvim";
+#  };
 
   programs.zsh = {
     enable = true;
@@ -28,7 +28,6 @@
       ".." = "cd ..";
       vim = "nvim";
     };
-
 
     oh-my-zsh = {
       enable = true;
