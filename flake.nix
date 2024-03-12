@@ -46,11 +46,11 @@
       system = "aarch64-darwin";
       modules = [
         ./hosts/Pims-MBP/configuration.nix
-        ./modules/common.nix
-        ./modules/cli_tools.nix
+#        ./modules/common.nix
+#        ./modules/cli_tools.nix
 
         ./modules/development
-        ./modules/terminal.nix
+#        ./modules/terminal.nix
 
         ./modules/apps/spotify.nix
 
@@ -98,6 +98,7 @@
             };
           }
           ./home/shell.nix
+          ./home/kitty.nix
         ]; # Defined later
       };
     };

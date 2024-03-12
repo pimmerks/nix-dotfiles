@@ -4,7 +4,12 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    # VCS
     git
+
+    # Editors
+    vim
+    neovim
 
     ### Tools
     gnumake
@@ -16,6 +21,22 @@
     protoc-gen-go-grpc
     protoc-gen-doc
     buf
+
+    # misc
+    tmux
+    jq
+    yq
+    tree
+    glances
+    watch
+    htop
+    killall
+    neofetch
+    fzf
+
+    # network
+    curl
+    wget
 
     # CLI
     glab # Gitlab cli
