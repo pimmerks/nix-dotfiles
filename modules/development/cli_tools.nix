@@ -15,6 +15,7 @@
     protoc-gen-go
     protoc-gen-go-grpc
     protoc-gen-doc
+    buf
 
     # CLI
     glab # Gitlab cli
