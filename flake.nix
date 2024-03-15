@@ -28,7 +28,14 @@
     overlay-stable = final: prev: {
       stable = nix-stable.legacyPackages.${prev.system};
     };
-  in {
+
+    systems = [ "x86_64-linux" ];
+    pkgsFor = lib.genAttrs systems (system:
+      import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
+  in rec {
     inherit lib;
 
     # Build darwin flake using:
@@ -88,8 +95,6 @@
         ./modules/virtualisation.nix
 
         ./modules/jetbrains
-
-#        ./home
       ];
 
       specialArgs = {
