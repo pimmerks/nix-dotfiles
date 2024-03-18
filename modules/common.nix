@@ -23,15 +23,15 @@
     home-manager
     dig
 
-    kitty
-
-    home-manager
-
-    # Programs I use:
-    spotify
-    discord
-    signal-desktop
-    chromium
+#    kitty
+#
+#    home-manager
+#
+#    # Programs I use:
+#    spotify
+#    discord
+#    signal-desktop
+#    chromium
   ];
 
   fonts = {

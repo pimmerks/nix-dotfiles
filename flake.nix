@@ -29,65 +29,30 @@
       stable = nix-stable.legacyPackages.${prev.system};
     };
 
-    systems = [ "x86_64-linux" ];
-    pkgsFor = lib.genAttrs systems (system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      });
+#    systems = [ "x86_64-linux" ];
+#    pkgsFor = lib.genAttrs systems (system:
+#      import nixpkgs {
+#        inherit system;
+#        config.allowUnfree = true;
+#      });
   in rec {
     inherit lib;
 
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Pims-MacBook-Pro
-    darwinConfigurations."Pims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [
-        ./hosts/Pims-MacBook-Pro/configuration.nix
-        ./modules/common.nix
-        ./modules/cli_tools.nix
-      ];
-      specialArgs = {
-        user = "pimmer";
-        inherit self inputs outputs;
-      };
-    };
-
-     # New MBP M3 - Arm chip
-    darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./hosts/Pims-MBP/configuration.nix
-#        ./modules/common.nix
-#        ./modules/cli_tools.nix
-
-        ./modules/development
-#        ./modules/terminal.nix
-
-        ./modules/apps/spotify.nix
-
-      ];
-      specialArgs = {
-        user = "pimmer";
-        homeDir = "/Users/pimmer";
-        inherit self inputs outputs;
-      };
-    };
-
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
-
     # Main desktop
-    # Build darwin flake using:
     # $ nixos-rebuild build --flake .#lin0
     nixosConfigurations."lin0" = lib.nixosSystem {
       modules = [
-        # Overlays-module makes "pkgs.stable" available in configuration.nix
-        ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
-
         ./hosts/lin0/configuration.nix
+        ./modules/hyprland.nix
+        ./modules/development
+
+        ./modules/apps/spotify.nix
+#        # Overlays-module makes "pkgs.stable" available in configuration.nix
+#        ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
+
+
         ./modules/common.nix
         ./modules/shell.nix
-        ./modules/hyprland.nix
         ./modules/development.nix
         ./modules/docker.nix
         ./modules/1password.nix
@@ -104,6 +69,41 @@
         inherit self inputs outputs;
       };
     };
+
+    darwinConfigurations = {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Pims-MacBook-Pro
+      "Pims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./hosts/Pims-MacBook-Pro/configuration.nix
+          ./modules/common.nix
+          ./modules/cli_tools.nix
+        ];
+        specialArgs = {
+          user = "pimmer";
+          inherit self inputs outputs;
+        };
+      };
+
+      # New MBP M3 - Arm chip
+      "Pims-MBP" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/Pims-MBP/configuration.nix
+          ./modules/development
+          ./modules/apps/spotify.nix
+        ];
+        specialArgs = {
+          user = "pimmer";
+          homeDir = "/Users/pimmer";
+          inherit self inputs outputs;
+        };
+      };
+
+    };
+
+    # Expose the package set, including overlays, for convenience.
+    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
 
     homeConfigurations."pimmer@lin0" = lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;

@@ -7,7 +7,7 @@
   programs.virt-manager.enable = true;
 
   # Install necessary packages
-  environment.systemPackages = with pkgs.stable; [
+  environment.systemPackages = with nix-stable.legacyPackages."x86_64-linux"; [
     virt-manager
     virt-viewer
     spice
