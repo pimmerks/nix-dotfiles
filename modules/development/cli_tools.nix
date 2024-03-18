@@ -11,7 +11,11 @@
     vim
     neovim
 
-    ### Tools
+    # golang tools
+    golangci-lint
+    govulncheck
+
+    # Tools
     gnumake
     grpcurl
 
