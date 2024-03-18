@@ -38,26 +38,13 @@
     neofetch
     fzf
 
-    # network
-    curl
-    wget
-
     # CLI
     glab # Gitlab cli
     awscli2 # AWS
+    aws-iam-authenticator
     gh
     dapr-cli
     argocd
-
-    # Kubernetes
-    kubectl
-    kubectx
-    stern # Multi pod and container log tailing for Kubernetes
-    k9s
-    kubernetes-helm
-    helm-docs
-    kubelogin
-    kustomize
 
     # Terraform
     terraform

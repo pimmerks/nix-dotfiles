@@ -44,7 +44,10 @@
       modules = [
         ./hosts/lin0/configuration.nix
         ./modules/hyprland.nix
+
         ./modules/development
+        ./modules/tools
+        ./modules/jetbrains
 
         ./modules/apps/spotify.nix
 #        # Overlays-module makes "pkgs.stable" available in configuration.nix
@@ -59,7 +62,6 @@
         ./modules/gaming.nix
         ./modules/virtualisation.nix
 
-        ./modules/jetbrains
       ];
 
       specialArgs = {
