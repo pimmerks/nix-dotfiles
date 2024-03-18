@@ -6,6 +6,13 @@ My nixos/macos configuration as a flake. Including dotfiles/home-manager/package
 
 Clone the repository and, depending on the system, execute the following commands:
 
+
+### NixOS
+
+```shell
+sudo nixos-rebuild switch --flake .#lin0
+```
+
 ### MacOS
 
 First time, install `nix-darwin` with:
@@ -20,14 +27,12 @@ After `nix-darwin` is installed, you're able to run `darwin-rebuild` to rebuild 
 darwin-rebuild switch --flake .#Pims-MacBook-Pro
 ```
 
-### NixOS
+### Updating programs
+
+Updating the nix lock file result in updated installed apps.
 
 ```shell
-sudo nixos-rebuild switch --flake .#lin0
+nix flake update --commit-lock-file
 ```
 
-## Updating lock file
-
-```shell
-nix flake update
-```
+After this, you have to rebuild your NixOS config, as seen above.

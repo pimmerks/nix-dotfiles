@@ -10,12 +10,15 @@
     ### Languages
 
     # Golang
-    go_1_21
+    go_1_22
     golangci-lint
     goose
+    gcc
+    libcap
 
     # NodeJS
     nodejs_20
+    bun
 
     # Python
     python312
@@ -33,9 +36,12 @@
     # CLI
     glab # Gitlab cli
     awscli2 # AWS
+    aws-iam-authenticator
     gh
     dapr-cli
     argocd
+    supabase-cli
+    stripe-cli
 
     # Kubernetes
     kubectl
@@ -43,6 +49,7 @@
     stern # Multi pod and container log tailing for Kubernetes
     k9s
     kubernetes-helm
+    kubernetes-helmPlugins.helm-diff
     helm-docs
     kubelogin
     kustomize
