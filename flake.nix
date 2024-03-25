@@ -53,6 +53,7 @@
 #        ./modules/terminal.nix
 
         ./modules/apps/spotify.nix
+        ./modules/fonts.nix
 
       ];
       specialArgs = {
