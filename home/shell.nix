@@ -25,7 +25,6 @@
     shellAliases = {
       ll = "ls -alh";
       ".." = "cd ..";
-      vim = "nvim";
 
       # Alias cat to bat, but keep it mostly plain for easy copy/pasting etc
       "cat" = "bat --style=plain --paging=never";
