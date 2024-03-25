@@ -6,12 +6,11 @@
   # Packages that should be installed to the user profile.
   home.packages = [
     pkgs.zsh-autosuggestions
-    pkgs.fasd
+    pkgs.fasd    # needed for 'z' jump-around
+    pkgs.ripgrep # Faster grep
+    pkgs.fd      # Faster find
+    pkgs.bat     # Better cat
   ];
-
-#  home.sessionVariables = {
-#    EDITOR = "nvim";
-#  };
 
   programs.zsh = {
     enable = true;
@@ -27,6 +26,9 @@
       ll = "ls -alh";
       ".." = "cd ..";
       vim = "nvim";
+
+      # Alias cat to bat, but keep it mostly plain for easy copy/pasting etc
+      "cat" = "bat --style=plain --paging=never";
     };
 
     oh-my-zsh = {
