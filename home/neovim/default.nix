@@ -7,8 +7,8 @@ let
     version = ref;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
-      ref = ref;
-      rev = rev;
+      inherit ref;
+      inherit rev;
     };
   };
 
@@ -194,7 +194,7 @@ in
 
       # Add whichkey support
       {
-        plugin = (fromGitHub "4433e5ec9a507e5097571ed55c02ea9658fb268a" "main" "folke/which-key.nvim");
+        plugin = fromGitHub "4433e5ec9a507e5097571ed55c02ea9658fb268a" "main" "folke/which-key.nvim";
         type = "lua";
         config = ''
           -- Show all keymaps
