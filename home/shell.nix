@@ -17,7 +17,11 @@
     autocd = true;
 
     enableCompletion = true;
-    enableAutosuggestions = true;
+
+    autosuggestion = {
+      enable = true;
+    };
+
     syntaxHighlighting = {
       enable = false;
     };
