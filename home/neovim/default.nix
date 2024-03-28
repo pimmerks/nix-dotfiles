@@ -72,7 +72,6 @@ in
         type = "lua";
       }
 
-
       { # https://github.com/catppuccin/nvim
         plugin = catppuccin-nvim;
         type = "lua";

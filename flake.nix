@@ -46,15 +46,11 @@
       system = "aarch64-darwin";
       modules = [
         ./hosts/Pims-MBP/configuration.nix
-#        ./modules/common.nix
-#        ./modules/cli_tools.nix
 
         ./modules/development
-#        ./modules/terminal.nix
-
         ./modules/apps/spotify.nix
+        ./modules/apps/onepassword.nix
         ./modules/fonts.nix
-
       ];
       specialArgs = {
         user = "pimmer";
@@ -89,7 +85,6 @@
       "pimmer@Pims-MBP" = home-manager.lib.homeManagerConfiguration {
         # Note: I am sure this could be done better with flake-utils or something
         pkgs = import nixpkgs { system = "aarch64-darwin"; };
-
         modules = [
           {
             home = {
@@ -98,6 +93,7 @@
               stateVersion = "23.11";
             };
           }
+
           ./home/shell.nix
           ./home/kitty.nix
           ./home/neovim
