@@ -1,26 +1,21 @@
 { config, pkgs, ... }:
 {
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
-    # Editors / tools
-    jetbrains.goland
-    jetbrains.webstorm
-    vscode
-    insomnia
+    # VCS
+    git
 
-    ### Languages
+    # Editors
+    vim
+    neovim
 
-    # Golang
-    go_1_21
+    # golang tools
     golangci-lint
-    goose
+    govulncheck
 
-    # NodeJS
-    nodejs_20
-
-    # Python
-    python312
-
-    ### Tools
+    # Tools
     gnumake
     grpcurl
 
@@ -29,6 +24,23 @@
     protoc-gen-go
     protoc-gen-go-grpc
     protoc-gen-doc
+    buf
+
+    # misc
+    tmux
+    jq
+    yq
+    tree
+    glances
+    watch
+    htop
+    killall
+    neofetch
+    fzf
+
+    # network
+    curl
+    wget
 
     # CLI
     glab # Gitlab cli

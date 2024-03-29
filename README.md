@@ -6,22 +6,25 @@ My nixos/macos configuration as a flake. Including dotfiles/home-manager/package
 
 Clone the repository and, depending on the system, execute the following commands:
 
-### MacOS
-
-First time, install `nix-darwin` with:
-
 ```shell
-nix run nix-darwin -- switch --flake ./
+# Build the flake to ./result
+make build
+
+# Switch the system to the newest version of this flake
+make switch
 ```
 
-After `nix-darwin` is installed, you're able to run `darwin-rebuild` to rebuild the system.
-
+## Home Manager
 ```shell
-darwin-rebuild switch --flake .#Pims-MacBook-Pro
+# Build the flake to ./result
+make hmbuild
+
+# Switch the system to the newest version of this flake
+make hmswitch
 ```
 
-### NixOS
+## Updating lock file
 
 ```shell
-sudo nixos-rebuild switch --flake .#lin0
+nix flake update --commit-lock-file
 ```

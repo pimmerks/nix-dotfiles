@@ -32,6 +32,26 @@
     darwinConfigurations."Pims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [
         ./hosts/Pims-MacBook-Pro/configuration.nix
+        ./modules/common.nix
+        ./modules/cli_tools.nix
+      ];
+      specialArgs = {
+        user = "pimmer";
+        inherit self inputs outputs;
+      };
+    };
+
+     # New MBP M3 - Arm chip
+    darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./hosts/Pims-MBP/configuration.nix
+
+        ./modules/development
+        ./modules/apps/spotify.nix
+        ./modules/apps/discord.nix
+        ./modules/apps/1password_cli.nix
+        ./modules/fonts.nix
       ];
       specialArgs = {
         user = "pimmer";
@@ -40,7 +60,7 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Pims-MacBook-Pro".pkgs;
+    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
 
     # Main desktop
     # Build darwin flake using:
@@ -59,6 +79,26 @@
       specialArgs = {
         user = "pimmer";
         inherit self inputs outputs;
+      };
+    };
+
+    homeConfigurations = {
+      "pimmer@Pims-MBP" = home-manager.lib.homeManagerConfiguration {
+        # Note: I am sure this could be done better with flake-utils or something
+        pkgs = import nixpkgs { system = "aarch64-darwin"; };
+        modules = [
+          {
+            home = {
+              username = "pimmer";
+              homeDirectory = "/Users/pimmer";
+              stateVersion = "23.11";
+            };
+          }
+
+          ./home/shell.nix
+          ./home/kitty.nix
+          ./home/neovim
+        ];
       };
     };
   };
