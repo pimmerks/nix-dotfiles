@@ -10,12 +10,14 @@ let
   kitty_font_size = if lib.strings.hasSuffix "darwin" pkgs.system
                     then "16.0"
                     else "11.0";
+
+  extra_pkgs = if lib.strings.hasSuffix "darwin" pkgs.system
+               then [ pkgs.terminal-notifier ]
+               else [];
 in
 
 {
-  home.packages = [
-    pkgs.terminal-notifier
-  ];
+  home.packages = extra_pkgs;
 
   programs.kitty = {
     enable = true;

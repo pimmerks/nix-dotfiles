@@ -9,22 +9,8 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./users.nix
+    ./bootloader.nix
   ];
-
-  # Bootloader.
-  boot = {
-    supportedFilesystems = [ "ntfs" ];
-    initrd = { kernelModules = [ "nvidia" ]; };
-    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-      };
-      systemd-boot = {
-        enable = true;
-      };
-    };
-  };
 
   networking.hostName = "lin0"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -57,14 +43,17 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  hardware.opengl.enable = true;
 
-  # Configure keymap in X11
+  # Enable the X11 windowing system and configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    enable = true;
+    displayManager.gdm.enable = true;
+
+    xkb = {
+      variant = "";
+      layout = "us";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -74,6 +63,8 @@
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.polkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -93,17 +84,22 @@
   environment.sessionVariables = {
     # Wayland fixes
     NIXOS_OZONE_WL = "1";
-    EDITOR = "nvim";
+  };
+
+  # Set mimetypes
+  xdg.mime.defaultApplications = {
+    "text/html" = "firefox.desktop";
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
+    "x-scheme-handler/about" = "firefox.desktop";
+    "x-scheme-handler/unknown" = "firefox.desktop";
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # # Others
-    # _1password
-    # _1password-gui
-    # discord
-    # spotify
+    cifs-utils
+    easyeffects
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -133,5 +129,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 }

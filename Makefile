@@ -7,12 +7,15 @@ HM_CMD   := $(shell which home-manager)
 
 ifeq ($(UNAME), Darwin)
 	REBUILD_CMD := $(shell which darwin-rebuild)
+	HOSTNAME    := $(shell scutil --get LocalHostName)
+else ifeq ($(UNAME), Linux)
+	REBUILD_CMD := $(shell which nixos-rebuild)
+	HOSTNAME    := $(shell hostname)
 else
 	$(error unknown OS $(UNAME))
 endif
 
 USER     ?= ""
-HOSTNAME ?= $(shell scutil --get LocalHostName)
 HM_FLAKE ?= ".\#$(USER)@$(HOSTNAME)"
 FLAKE    ?= ".\#$(HOSTNAME)"
 
@@ -22,8 +25,11 @@ build: clean
 
 .PHONY: switch
 switch: clean
+ifeq ($(UNAME), Darwin)
 	$(REBUILD_CMD) switch --flake $(FLAKE)
-
+else ifeq ($(UNAME), Linux)
+	sudo $(REBUILD_CMD) switch --flake $(FLAKE)
+endif
 
 .PHONY: hmbuild
 hmbuild: clean
@@ -36,7 +42,6 @@ hmswitch: clean
 .PHONY: hmnews
 hmnews: clean
 	$(HM_CMD) news --flake $(HM_FLAKE)
-
 
 .PHONY: clean
 clean:

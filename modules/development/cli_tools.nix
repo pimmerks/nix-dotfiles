@@ -37,27 +37,21 @@
     killall
     neofetch
     fzf
+    unzip
+    gotop
 
     # network
     curl
     wget
+    dig
 
     # CLI
     glab # Gitlab cli
     awscli2 # AWS
     gh
     dapr-cli
-    argocd
-
-    # Kubernetes
-    kubectl
-    kubectx
-    stern # Multi pod and container log tailing for Kubernetes
-    k9s
-    kubernetes-helm
-    helm-docs
-    kubelogin
-    kustomize
+    supabase-cli
+    stripe-cli
 
     # Terraform
     terraform

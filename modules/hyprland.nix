@@ -1,7 +1,25 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, user, homeDir, ... }:
 {
+  nix.settings = {
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+  };
+
   programs.hyprland = {
     enable = true;
+  };
+
+  # greeter
+  services.xserver.displayManager.gdm.enable = lib.mkForce false;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --power-shutdown 'systemctl poweroff -i' --power-reboot 'systemctl reboot' --cmd Hyprland";
+        #command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}";
+        user = "greeter";
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -35,11 +53,23 @@
     xdg-desktop-portal-hyprland
     dbus
 
+    # Authentication agent
+    libsForQt5.polkit-kde-agent
+
     # QT Wayland support
     #qt5-wayland
     #qt6-wayland
 
-    kitty
+    # File browsing + Gnome stuff
+    gnome.nautilus
+    gnome.file-roller
+    gnome.eog # Image viewer
+    gnome.gnome-font-viewer
+    gnome.gnome-calculator
+    gnome.gnome-system-monitor
+
+    # Misc
+    mangohud
   ];
 
   security.pam.services.swaylock = {};
