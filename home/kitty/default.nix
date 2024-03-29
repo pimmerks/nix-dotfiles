@@ -29,7 +29,7 @@
       kitty_mod = "ctrl+shift";
     };
 
-    # keybindings = {
+     keybindings = {
     #   "kitty_mod+c" = "copy_to_clipboard"
     #   "cmd+c" = "copy_to_clipboard"
 
@@ -50,17 +50,17 @@
 
     #   "kitty_mod+l" = "next_layout"
 
-    #   "cmd+1" = "goto_tab 1"
-    #   "cmd+2" = "goto_tab 2"
-    #   "cmd+3" = "goto_tab 3"
-    #   "cmd+4" = "goto_tab 4"
-    #   "cmd+5" = "goto_tab 5"
-    #   "cmd+6" = "goto_tab 6"
-    #   "cmd+7" = "goto_tab 7"
-    #   "cmd+8" = "goto_tab 8"
-    #   "cmd+9" = "goto_tab 9"
-    #   "cmd+0" = "goto_tab 10"
-    # };
+       "kitty_mod+1" = "goto_tab 1";
+       "kitty_mod+2" = "goto_tab 2";
+       "kitty_mod+3" = "goto_tab 3";
+       "kitty_mod+4" = "goto_tab 4";
+       "kitty_mod+5" = "goto_tab 5";
+       "kitty_mod+6" = "goto_tab 6";
+       "kitty_mod+7" = "goto_tab 7";
+       "kitty_mod+8" = "goto_tab 8";
+       "kitty_mod+9" = "goto_tab 9";
+       "kitty_mod+0" = "goto_tab 10";
+     };
 
 
   };

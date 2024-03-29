@@ -50,6 +50,7 @@
         ./modules/jetbrains
 
         ./modules/apps/spotify.nix
+        ./modules/apps/discord.nix
 #        # Overlays-module makes "pkgs.stable" available in configuration.nix
 #        ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
 
