@@ -13,6 +13,9 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # Add ntfs for the windows drive
+  boot.supportedFilesystems = [ "ntfs" ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/edb10dc6-ed89-4de1-8134-19d2d3d2ae0b";
       fsType = "ext4";
@@ -26,6 +29,12 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/35890a7f-446d-46f1-a913-33b8f8af1ad8"; }
     ];
+
+  fileSystems."/mnt/windows" =
+    { device = "/dev/disk/by-uuid/6ABE472FBE46F35D";
+      fsType = "ntfs-3g";
+      options = [ "rw" "uid=1000"];
+    };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
