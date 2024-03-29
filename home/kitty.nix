@@ -1,4 +1,16 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+
+let
+  # If this is a darwin system, use `cmd`, else use `ctrl+shift`.
+  kitty_mod_key = if lib.strings.hasSuffix "darwin" pkgs.system
+                  then "cmd"
+                  else "ctrl+shift";
+
+  # If this is a darwin system, we need a bigger font.
+  kitty_font_size = if lib.strings.hasSuffix "darwin" pkgs.system
+                    then "16.0"
+                    else "11.0";
+in
 
 {
   home.packages = [
@@ -14,13 +26,17 @@
     };
 
     settings = {
+      kitty_mod = kitty_mod_key;
+
       scrollback_lines = 10000;
 
       bold_font        = "auto";
       italic_font      = "auto";
       bold_italic_font = "auto";
+
       font_family = "MesloLGL Nerd Font";
-      font_size = "16.0"; # 11 for lin0
+      font_size = kitty_font_size;
+
       adjust_line_height = -4;
       adjust_baseline = 2;
       disable_ligatures = "never";
@@ -38,7 +54,6 @@
       active_tab_font_style = "bold-italic";
 
       macos_titlebar_color = "dark";
-      kitty_mod = "cmd";
     };
 
     keybindings = {
