@@ -49,6 +49,7 @@
 
         ./modules/development
         ./modules/apps/spotify.nix
+        ./modules/apps/discord.nix
         ./modules/apps/1password_cli.nix
         ./modules/fonts.nix
       ];
