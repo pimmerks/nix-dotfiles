@@ -6,5 +6,8 @@
     nodejs_21
 
     python312
+
+    # d2 for building diagrams
+    d2
   ];
 }
