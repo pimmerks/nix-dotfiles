@@ -17,5 +17,8 @@
     helm-docs
     kubelogin
     kustomize
+
+    # Local kubernetes on docker
+    kind
   ];
 }
