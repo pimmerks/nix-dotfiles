@@ -27,7 +27,7 @@
     waybar # Top bar
     wayland-utils
     wayland-protocols
-    rofi # Menu bar
+    rofi-wayland # app launcher
     mako # Wayland notification daemon
     playerctl
     hyprland
