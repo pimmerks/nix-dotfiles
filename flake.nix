@@ -41,7 +41,7 @@
       };
     };
 
-     # New MBP M3 - Arm chip
+    # New MBP M3 - Arm chip
     darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
