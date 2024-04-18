@@ -131,6 +131,7 @@
           ./home/shell.nix
           ./home/kitty.nix
           ./home/neovim
+          ./home/desktop
         ];
       };
     };

@@ -1,11 +1,16 @@
-{ config, pkgs, lib, ... }:
-{
+{ lib, self, config, pkgs, ... }: {
+
+  imports = [
+    ./mako.nix
+    ./waybar
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
     package = pkgs.hyprland;
 
-    settings = {};
-
+    settings = import ./hyprland-config.nix { inherit config self pkgs lib; };
   };
 }
