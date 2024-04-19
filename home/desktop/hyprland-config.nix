@@ -35,7 +35,7 @@
   "exec-once" = let
     onepassword = "${pkgs._1password-gui}/bin/1password";
     wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
-    discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop --start-minimized";
+    discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop";
     spotify = "${pkgs.spotify}/bin/spotify";
     hyprpaper = "${pkgs.hyprpaper}/bin/hyprpaper";
   in [
@@ -146,7 +146,7 @@
   };
 
   windowrulev2 = [
-    "workspace 4, class:(discord), title:(Discord)"
+    "workspace 5 silent, class:^(discord)$"
 
     # Jetbrains IDE's
     # context-menus
