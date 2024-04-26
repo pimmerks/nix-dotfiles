@@ -10,7 +10,7 @@
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     transition-property: background-color;
     transition-duration: 0.5s;
 }
@@ -78,10 +78,17 @@ window#waybar.hidden {
     background-color: #585b70;
 }
 
-#window {
-    color: #cdd6f4;
-    background-color: #11111b;
+
+/* make window module transparent when no windows present */
+window#waybar.empty #window {
+    background-color: transparent;
 }
+
+#window {
+    color: #e2e7f4;
+    background-color: #585b70;
+}
+
 
 #tray {
     background-color: #585b70;
