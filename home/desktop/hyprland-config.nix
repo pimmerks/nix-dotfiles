@@ -34,19 +34,14 @@
 
   "exec-once" = let
     onepassword = "${pkgs._1password-gui}/bin/1password";
-    wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
     discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop";
     spotify = "${pkgs.spotify}/bin/spotify";
   in [
     # Execute your favorite apps at launch
-
     "${onepassword} --silent" # Startup 1password already
 
     # Swayidle
     "~/.config/hypr/scripts/idle.sh"
-
-    # Clipboard history
-    "${wlpaste} --watch cliphist store"
 
     # Startup other tools
     "[workspace 5 silent] ${discord}"

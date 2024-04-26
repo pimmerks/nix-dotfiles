@@ -16,21 +16,40 @@
     settings = import ./hyprland-config.nix { inherit config self pkgs lib; };
   };
 
-  # hyprpaper systemd service
-  systemd.user.services.hyprpaper = {
-    Unit = {
-      Description = "Hyprpaper";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session-pre.target" ];
+  systemd.user.services = {
+    hyprpaper = {
+      Unit = {
+        Description = "Hyprpaper";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+        ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+        Restart = "on-failure";
+        KillMode = "mixed";
+      };
+
+      Install = { WantedBy = [ "graphical-session.target" ]; };
     };
 
-    Service = {
-      ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
-      ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-      Restart = "on-failure";
-      KillMode = "mixed";
+    clipboard-history = {
+      Unit = {
+        Description = "Clipboard History";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
+        Restart = "on-failure";
+        KillMode = "mixed";
+      };
+
+      Install = { WantedBy = [ "graphical-session.target" ]; };
     };
 
-    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
+
 }
