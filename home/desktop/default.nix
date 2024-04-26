@@ -3,6 +3,7 @@
   imports = [
     ./mako.nix
     ./waybar
+    ./wallpapers
   ];
 
   nixpkgs.config.allowUnfree = true;
