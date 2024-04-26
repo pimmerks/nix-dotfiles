@@ -37,12 +37,10 @@
     wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
     discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop";
     spotify = "${pkgs.spotify}/bin/spotify";
-    hyprpaper = "${pkgs.hyprpaper}/bin/hyprpaper";
   in [
     # Execute your favorite apps at launch
 
     "${onepassword} --silent" # Startup 1password already
-    "hyprpaper"
 
     # Swayidle
     "~/.config/hypr/scripts/idle.sh"
