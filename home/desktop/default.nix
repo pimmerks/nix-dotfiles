@@ -20,8 +20,8 @@
     hyprpaper = {
       Unit = {
         Description = "Hyprpaper";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "hyprland-session.target" ];
+        After = [ "graphical-session.target" ];
       };
 
       Service = {
@@ -31,14 +31,14 @@
         KillMode = "mixed";
       };
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = { WantedBy = [ "hyprland-session.target" ]; };
     };
 
     clipboard-history = {
       Unit = {
         Description = "Clipboard History";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "hyprland-session.target" ];
+        After = [ "graphical-session.target" ];
       };
 
       Service = {
@@ -47,7 +47,7 @@
         KillMode = "mixed";
       };
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = { WantedBy = [ "hyprland-session.target" ]; };
     };
 
   };
