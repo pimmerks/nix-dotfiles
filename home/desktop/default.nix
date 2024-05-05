@@ -16,6 +16,15 @@
     settings = import ./hyprland-config.nix { inherit config self pkgs lib; };
   };
 
+  services = {
+    wlsunset = {
+      enable = true;
+      latitude = "51.5";
+      longitude = "5.4";
+      temperature.night = 3500;
+    };
+  };
+
   systemd.user.services = {
     hyprpaper = {
       Unit = {
