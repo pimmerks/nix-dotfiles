@@ -68,6 +68,8 @@
     gnome.gnome-calculator
     gnome.gnome-system-monitor
 
+    vlc # media player
+
     # Misc
     mangohud
   ];
