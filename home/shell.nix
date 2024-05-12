@@ -10,6 +10,7 @@
     pkgs.ripgrep # Faster grep
     pkgs.fd      # Faster find
     pkgs.bat     # Better cat
+    pkgs.difftastic # Better diffing
   ];
 
   programs.zsh = {
