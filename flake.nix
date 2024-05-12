@@ -52,6 +52,8 @@
         ./modules/apps/discord.nix
         ./modules/apps/1password_cli.nix
         ./modules/fonts.nix
+
+        ./modules/nix.nix
       ];
       specialArgs = {
         user = "pimmer";
