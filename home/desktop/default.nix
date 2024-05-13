@@ -23,6 +23,11 @@
       longitude = "5.4";
       temperature.night = 3500;
     };
+
+    cliphist = {
+      enable = true;
+      systemdTarget = "hyprland-session.target";
+    };
   };
 
   systemd.user.services = {
@@ -42,23 +47,4 @@
 
       Install = { WantedBy = [ "hyprland-session.target" ]; };
     };
-
-    clipboard-history = {
-      Unit = {
-        Description = "Clipboard History";
-        PartOf = [ "hyprland-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
-        Restart = "on-failure";
-        KillMode = "mixed";
-      };
-
-      Install = { WantedBy = [ "hyprland-session.target" ]; };
-    };
-
-  };
-
 }
