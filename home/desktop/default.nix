@@ -29,22 +29,4 @@
       systemdTarget = "hyprland-session.target";
     };
   };
-
-  systemd.user.services = {
-    hyprpaper = {
-      Unit = {
-        Description = "Hyprpaper";
-        PartOf = [ "hyprland-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
-        ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-        Restart = "on-failure";
-        KillMode = "mixed";
-      };
-
-      Install = { WantedBy = [ "hyprland-session.target" ]; };
-    };
 }

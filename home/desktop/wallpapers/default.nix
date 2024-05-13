@@ -9,22 +9,26 @@ let
 
   mkWallpaperDir = file: "~/${default-dir}/${file}";
 
-  preloads = builtins.map (w: "preload = ${mkWallpaperDir w}\n") wallpapers;
+  preloads = builtins.map (w: mkWallpaperDir w) wallpapers;
 in
 {
-  home.file = {
-    ".config/hypr/hyprpaper.conf" = {
-      text = ''
-      ${lib.concatStrings preloads}
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "on";
+      splash = false;
 
-      # manual for now... :(
-      wallpaper = HDMI-A-2, ${mkWallpaperDir (builtins.elemAt wallpapers 1)}
-      wallpaper = HDMI-A-1, ${mkWallpaperDir (builtins.elemAt wallpapers 2)}
+      preload = preloads;
 
-      splash = false
-      '';
+      wallpaper = [
+        # manual for now... :(
+        "HDMI-A-2, ${mkWallpaperDir (builtins.elemAt wallpapers 1)}"
+        "HDMI-A-1, ${mkWallpaperDir (builtins.elemAt wallpapers 2)}"
+      ];
     };
-  } // builtins.listToAttrs(
+  };
+
+  home.file = builtins.listToAttrs(
     builtins.map(
       w: { name = "${default-dir}/${w}"; value = { source = ./${w};}; }
     ) wallpapers
