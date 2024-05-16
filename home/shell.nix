@@ -13,53 +13,61 @@
     pkgs.difftastic # Better diffing
   ];
 
-  programs.zsh = {
-    enable = true;
-    autocd = true;
-
-    enableCompletion = true;
-
-    autosuggestion = {
+  programs = {
+    direnv = {
       enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
     };
 
-    syntaxHighlighting = {
-      enable = false;
-    };
-
-    shellAliases = {
-      ll = "ls -alh";
-      ".." = "cd ..";
-      dc = "docker compose";
-
-      # Alias cat to bat, but keep it mostly plain for easy copy/pasting etc
-      "cat" = "bat --style=plain --paging=never";
-    };
-
-    oh-my-zsh = {
+    zsh = {
       enable = true;
-      theme = "bira";
-      plugins = [
-        "git"
-        "kubectl"
-        "kubectx"
-        "helm"
-        "gitfast"
-        "gitignore"
-        "fasd"
-        "fzf"
-        "docker"
-        "alias-finder"
-        "aliases"
-        "colored-man-pages"
-        "command-not-found"
-#        "zsh-autosuggestions"
-        "nvm"
-        "1password"
-        "macos"
-        "direnv"
-        "aws"
-      ];
+      autocd = true;
+
+      enableCompletion = true;
+
+      autosuggestion = {
+        enable = true;
+      };
+
+      syntaxHighlighting = {
+        enable = false;
+      };
+
+      shellAliases = {
+        ll = "ls -alh";
+        ".." = "cd ..";
+        dc = "docker compose";
+
+        # Alias cat to bat, but keep it mostly plain for easy copy/pasting etc
+        "cat" = "bat --style=plain --paging=never";
+      };
+
+      oh-my-zsh = {
+        enable = true;
+        theme = "bira";
+        plugins = [
+          "git"
+          "kubectl"
+          "kubectx"
+          "helm"
+          "gitfast"
+          "gitignore"
+          "fasd"
+          "fzf"
+          "docker"
+          "alias-finder"
+          "aliases"
+          "colored-man-pages"
+          "command-not-found"
+#          "zsh-autosuggestions"
+          "nvm"
+          "1password"
+          "macos"
+          "direnv"
+          "aws"
+        ];
+      };
     };
   };
 }
