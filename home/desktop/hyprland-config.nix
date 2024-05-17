@@ -40,9 +40,6 @@
     # Execute your favorite apps at launch
     "${onepassword} --silent" # Startup 1password already
 
-    # Swayidle
-    "~/.config/hypr/scripts/idle.sh"
-
     # Startup other tools
     "[workspace 5 silent] ${discord}"
     "[workspace 5 silent] ${spotify}"
