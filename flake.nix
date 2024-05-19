@@ -24,8 +24,23 @@
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
+    systems = [ "x86_64-linux" "aarch64-darwin" ];
+
+    forEachSystem = f:
+      lib.genAttrs systems (system: f system pkgsFor.${system});
+
+    pkgsFor = lib.genAttrs systems (system:
+      import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
+
   in {
     inherit lib;
+    packages = forEachSystem (system: pkgs: import ./pkgs { inherit pkgs; });
+
+    # Expose the package set, including overlays, for convenience.
+    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
 
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Pims-MacBook-Pro
@@ -60,9 +75,6 @@
         inherit self inputs outputs;
       };
     };
-
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
 
     # Main desktop
     # Build darwin flake using:
@@ -99,8 +111,10 @@
 
     homeConfigurations = {
       "pimmer@Pims-MBP" = home-manager.lib.homeManagerConfiguration {
-        # Note: I am sure this could be done better with flake-utils or something
-        pkgs = import nixpkgs { system = "aarch64-darwin"; };
+        pkgs = pkgsFor.aarch64-darwin;
+        extraSpecialArgs = {
+          inherit self inputs outputs;
+        };
         modules = [
           {
             home = {
@@ -117,8 +131,10 @@
       };
 
       "pimmer@lin0" = home-manager.lib.homeManagerConfiguration {
-        # Note: I am sure this could be done better with flake-utils or something
-        pkgs = import nixpkgs { system = "x86_64-linux"; };
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {
+          inherit self inputs outputs;
+        };
         modules = [
           {
             home = {

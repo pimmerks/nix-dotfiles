@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, self, pkgs, ... }:
+let
+  audio-output-changer = "${self.packages.${pkgs.system}.audio-output-changer}/bin/audio-output-changer";
+in
+{
   programs.waybar = {
     enable = true;
     systemd = {
@@ -91,7 +95,7 @@
           };
           tooltip = true;
           tooltip-format = "{icon} {desc}";
-          on-click = "~/.config/waybar/scripts/audio_output_changer.py";
+          on-click = audio-output-changer;
         };
 
         idle_inhibitor = {

@@ -1,0 +1,11 @@
+[project]
+name = "audio-output-changer"
+requires-python = ">=3.8"
+version = "1.0.0"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+audio-output-changer = "audio_output_changer:main"

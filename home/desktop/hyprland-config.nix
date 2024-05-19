@@ -190,23 +190,24 @@
     gnome-system-monitor = "${pkgs.gnome.gnome-system-monitor}/bin/gnome-system-monitor";
     kitty = "${pkgs.kitty}/bin/kitty";
     playerctl = "${pkgs.playerctl}/bin/playerctl";
-#    waybar = "${pkgs.waybar}/bin/waybar";
-#    wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
-#    discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop --start-minimized";
-#    spotify = "${pkgs.spotify}/bin/spotify";
-#    hyprpaper = "${pkgs.hyprpaper}/bin/hyprpaper";
+    rofi = "${pkgs.rofi-wayland}/bin/rofi";
+
+    screenshot-copy = "${self.packages.${pkgs.system}.screenshot-copy}/bin/screenshot-copy";
+    volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
+    cliphist-rofi = "${self.packages.${pkgs.system}.cliphist-rofi}/bin/cliphist-rofi";
+    power-menu-rofi = "${self.packages.${pkgs.system}.power-menu-rofi}/bin/power-menu-rofi";
+    monitor-brightness = "${self.packages.${pkgs.system}.monitor-brightness}/bin/monitor-brightness";
+
   in [
     "$mainMod, Q, killactive,"
-    #"$mainMod, M, exit,"
-
-    "$mainMod, F1, exec, ~/.config/hypr/keybind"
-
     "$mainMod, RETURN, exec, ${kitty}"
 
     # Try to mimick some kind of alt-tab, not working atm...
-    "ALT, TAB, exec, rofi -show window -kb-accept-entry \"Tab,!Alt+Alt_L\" -kb-row-down \"Alt+Tab\" -selected-row 1 -kb-element-next \"Down\""
+#    "ALT, TAB, exec, rofi -show window -kb-accept-entry \"Tab,!Alt+Alt_L\" -kb-row-down \"Alt+Tab\" -selected-row 1 -kb-element-next \"Down\""
+    "ALT, TAB, cyclenext"
+    "ALT, Tab, bringactivetotop"
 
-    "ALT, SPACE, exec, rofi -show drun"
+    "ALT, SPACE, exec, ${rofi} -show drun"
     "ALT, SPACE, focuswindow, title:(rofi), floating"
 
     "$mainMod, T, togglefloating,"
@@ -216,25 +217,27 @@
     "$mainMod, F, fullscreen,1"
     "$mainMod SHIFT, F, fullscreen,0"
 
-    "$mainMod, L, exec, ~/.config/rofi/modi/power" # Open power menu
-    "$mainMod, F1, exec, ~/.config/hypr/keybind"
-    "$mainMod SHIFT,C,exec,bash ~/.config/hypr/scripts/hyprPicker.sh"
+    "$mainMod, L, exec, ${power-menu-rofi}" # Open power menu
 
     "ALTCTRL, DELETE, exec, ${gnome-system-monitor}"
 
-    "SUPER, V, exec, rofi -modi clipboard:~/.config/hypr/scripts/cliphist-rofi -show clipboard"
+    "SUPER, V, exec, ${rofi} -modi clipboard:${cliphist-rofi} -show clipboard"
     "CTRLSHIFT, SPACE, exec, ${onepassword} --quick-access"
 
-    ", XF86AudioRaiseVolume, exec, bash ~/.config/hypr/scripts/volume.sh up"
-    ", XF86AudioLowerVolume, exec, bash ~/.config/hypr/scripts/volume.sh down"
-    ", XF86AudioMute, exec, bash ~/.config/hypr/scripts/volume.sh mute"
+    ", XF86AudioRaiseVolume, exec, ${volume-control} up"
+    ", XF86AudioLowerVolume, exec, ${volume-control} down"
+    ", XF86AudioMute,        exec, ${volume-control} mute"
+
     ", XF86AudioPlay, exec, ${playerctl} play-pause"
     ", XF86AudioPrev, exec, ${playerctl} previous"
     ", XF86AudioNext, exec, ${playerctl} next"
 
+    ", XF86MonBrightnessUp,   exec, ${monitor-brightness} up"
+    ", XF86MonBrightnessDown, exec, ${monitor-brightness} down"
+
     # Colorpicker one mainMod + printscreen
     "$mainMod, Print, exec, ${hyprpicker} --autocopy --no-fancy"
-    ", Print, exec, ~/.config/hypr/scripts/screenshot-savecopy.sh"
+    ", Print, exec, ${screenshot-copy}"
 
     # Move focus with mainMod + arrow keys
     "$mainMod, left,  movefocus, l"
