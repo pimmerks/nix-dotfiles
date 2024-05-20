@@ -36,6 +36,18 @@
       options = [ "rw" "uid=1000"];
     };
 
+  fileSystems."/mnt/nas" = {
+    device = "nas:/volume1/";
+    fsType = "nfs";
+    options = [ # Dont automount, and disconnect after 600 seconds (10 mins)
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+    ];
+  };
+
+  services.rpcbind.enable = true; # needed for NFS
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

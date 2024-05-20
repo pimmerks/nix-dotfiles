@@ -57,8 +57,8 @@
     libsForQt5.polkit-kde-agent
 
     # QT Wayland support
-    #qt5-wayland
-    #qt6-wayland
+    libsForQt5.qt5.qtwayland
+    qt6.qtwayland
 
     # File browsing + Gnome stuff
     gnome.nautilus
@@ -68,11 +68,13 @@
     gnome.gnome-calculator
     gnome.gnome-system-monitor
 
+    vlc # media player
+
     # Misc
     mangohud
   ];
 
-  security.pam.services.swaylock = {};
+  security.pam.services.hyprlock = {};
 
   xdg.portal = {
     enable = true;
