@@ -62,3 +62,7 @@ lint:
 .PHONY: fix
 fix:
 	$(NIX_CMD) run nixpkgs#statix -- fix
+
+.PHONY: update
+update:
+	$(NIX_CMD) flake update --commit-lock-file --commit-lockfile-summary "chore(deps): update flake.lock"

@@ -21,10 +21,13 @@ make hmbuild
 
 # Switch the system to the newest version of this flake
 make hmswitch
+
+# View news
+make hmnews
 ```
 
 ## Updating lock file
 
 ```shell
-nix flake update --commit-lock-file
+make update
 ```
