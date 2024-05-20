@@ -39,9 +39,6 @@
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs { inherit pkgs; });
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Pims-MBP".pkgs;
-
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Pims-MacBook-Pro
     darwinConfigurations."Pims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
