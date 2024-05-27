@@ -10,17 +10,17 @@ let
   systemctl = "${pkgs.systemd}/bin/systemctl";
 
   script = pkgs.writeShellScriptBin "${scriptName}" ''
-    entries="Lock,Suspend,Logout,Reboot,Shutdown"
+    entries="Lock,Sleep,Logout,Reboot,Shutdown"
 
     selected=$(echo ''${entries} | ${rofi} -m 0 -dmenu -sep ',' -p "Powermenu" -i | ${awk} '{print tolower($1)}')
 
     case $selected in
+      lock)
+        exec ${loginctl} lock-session;;
+      sleep)
+        exec ${systemctl} suspend;;
       logout)
         exec ${hyprctl} dispatch exit;;
-      lock)
-        exec ${sleep} 1 && hyprctl dispatch dpms off;;
-      suspend)
-        exec ${systemctl} suspend;;
       reboot)
         exec ${systemctl} reboot;;
       shutdown)
