@@ -183,6 +183,20 @@
     "$mainMod, mouse:273, resizewindow"
   ];
 
+  # Keybindings even when locked
+  bindl = let
+    volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
+    playerctl = "${pkgs.playerctl}/bin/playerctl";
+  in [
+      ", XF86AudioRaiseVolume, exec, ${volume-control} up"
+      ", XF86AudioLowerVolume, exec, ${volume-control} down"
+      ", XF86AudioMute,        exec, ${volume-control} mute"
+
+      ", XF86AudioPlay, exec, ${playerctl} play-pause"
+      ", XF86AudioPrev, exec, ${playerctl} previous"
+      ", XF86AudioNext, exec, ${playerctl} next"
+  ];
+
   # Keybindings
   bind = let
     onepassword = "${pkgs._1password-gui}/bin/1password";
@@ -197,7 +211,6 @@
     cliphist-rofi = "${self.packages.${pkgs.system}.cliphist-rofi}/bin/cliphist-rofi";
     power-menu-rofi = "${self.packages.${pkgs.system}.power-menu-rofi}/bin/power-menu-rofi";
     monitor-brightness = "${self.packages.${pkgs.system}.monitor-brightness}/bin/monitor-brightness";
-
   in [
     "$mainMod, Q, killactive,"
     "$mainMod, RETURN, exec, ${kitty}"
@@ -223,14 +236,6 @@
 
     "SUPER, V, exec, ${rofi} -modi clipboard:${cliphist-rofi} -show clipboard"
     "CTRLSHIFT, SPACE, exec, ${onepassword} --quick-access"
-
-    ", XF86AudioRaiseVolume, exec, ${volume-control} up"
-    ", XF86AudioLowerVolume, exec, ${volume-control} down"
-    ", XF86AudioMute,        exec, ${volume-control} mute"
-
-    ", XF86AudioPlay, exec, ${playerctl} play-pause"
-    ", XF86AudioPrev, exec, ${playerctl} previous"
-    ", XF86AudioNext, exec, ${playerctl} next"
 
     ", XF86MonBrightnessUp,   exec, ${monitor-brightness} up"
     ", XF86MonBrightnessDown, exec, ${monitor-brightness} down"
@@ -273,5 +278,4 @@
     "$mainMod SHIFT, 9, movetoworkspace, 9"
     "$mainMod SHIFT, 0, movetoworkspace, 10"
   ];
-
 }
