@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./cli_tools.nix

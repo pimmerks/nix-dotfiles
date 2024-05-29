@@ -14,7 +14,8 @@ let
     ${wl-copy} < "$FILE"
   '';
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = scriptName;
   src = script;
   phases = "installPhase";

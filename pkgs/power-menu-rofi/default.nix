@@ -4,7 +4,6 @@ let
 
   awk = "${pkgs.gawk}/bin/awk";
   rofi = "${pkgs.rofi-wayland}/bin/rofi";
-  sleep = "${pkgs.coreutils}/bin/sleep";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   systemctl = "${pkgs.systemd}/bin/systemctl";
@@ -28,7 +27,8 @@ let
     esac
   '';
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = scriptName;
   src = script;
   phases = "installPhase";

@@ -1,4 +1,4 @@
-{ config, self, pkgs, ... }:
+{ self, pkgs, ... }:
 let
   audio-output-changer = "${self.packages.${pkgs.system}.audio-output-changer}/bin/audio-output-changer";
 in
@@ -15,14 +15,14 @@ in
         layer = "top";
         position = "top";
 
-#        height = 49;
+        #        height = 49;
         spacing = 1;
         gtk-layer-shell = true;
 
         #
         # Left modules
         #
-        modules-left = ["hyprland/workspaces" "wlr/taskbar"];
+        modules-left = [ "hyprland/workspaces" "wlr/taskbar" ];
         "hyprland/workspaces" = {
           format = "{name}";
           on-click = "activate";
@@ -34,7 +34,7 @@ in
         #
         # Center modules
         #
-        modules-center = ["hyprland/window"];
+        modules-center = [ "hyprland/window" ];
         "hyprland/window" = {
           max-length = 200;
           separate-outputs = true;
@@ -91,7 +91,7 @@ in
           format = "{icon} {volume}%";
           format-muted = "󰖁 {volume}%";
           format-icons = {
-            default = ["󰕿" "󰖀" "󰕾" ];
+            default = [ "󰕿" "󰖀" "󰕾" ];
           };
           tooltip = true;
           tooltip-format = "{icon} {desc}";

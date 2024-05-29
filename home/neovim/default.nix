@@ -72,13 +72,15 @@ in
         type = "lua";
       }
 
-      { # https://github.com/catppuccin/nvim
+      {
+        # https://github.com/catppuccin/nvim
         plugin = catppuccin-nvim;
         type = "lua";
         config = builtins.readFile ./plugins/catpuccin.lua;
       }
 
-      { # highly extendable fuzzy finder over lists. https://github.com/nvim-telescope/telescope.nvim
+      {
+        # highly extendable fuzzy finder over lists. https://github.com/nvim-telescope/telescope.nvim
         plugin = telescope-nvim;
         type = "lua";
         config = ''
@@ -142,54 +144,54 @@ in
           })
         '';
       }
-#
-#      # It's important that you set up the plugins in the following order:
-#      #
-#      #    mason.nvim
-#      #    mason-lspconfig.nvim
-#      #    Setup servers via lspconfig
-#      #
-#      #Pay extra attention to this if you lazy-load plugins, or somehow "chain" the loading of plugins via your plugin manager.
-#
-#      {
-#        plugin = mason-nvim;
-#        type = "lua";
-#        config = ''
-#          require("mason").setup({})
-#        '';
-#      }
-#
-#      {
-#        plugin = mason-lspconfig-nvim;
-#        type = "lua";
-#        config = ''
-#          require("mason-lspconfig").setup({})
-#        '';
-#      }
-#
-#      nvim-lspconfig
-#
-#
-#
-#      {
-#        plugin = lsp-zero-nvim;
-#        type = "lua";
-#        config = ''
-#          require('lsp-zero')
-#        '';
-#      }
-#
-#      {
-#        plugin = nvim-cmp;
-#        type = "lua";
-#        config = ''
-#          local cmp = require('cmp')
-#
-#          vim.keymap.set("n", "C-<space>", cmp.mapping.complete())
-#
-#          cmp.setup({})
-#        '';
-#      }
+      #
+      #      # It's important that you set up the plugins in the following order:
+      #      #
+      #      #    mason.nvim
+      #      #    mason-lspconfig.nvim
+      #      #    Setup servers via lspconfig
+      #      #
+      #      #Pay extra attention to this if you lazy-load plugins, or somehow "chain" the loading of plugins via your plugin manager.
+      #
+      #      {
+      #        plugin = mason-nvim;
+      #        type = "lua";
+      #        config = ''
+      #          require("mason").setup({})
+      #        '';
+      #      }
+      #
+      #      {
+      #        plugin = mason-lspconfig-nvim;
+      #        type = "lua";
+      #        config = ''
+      #          require("mason-lspconfig").setup({})
+      #        '';
+      #      }
+      #
+      #      nvim-lspconfig
+      #
+      #
+      #
+      #      {
+      #        plugin = lsp-zero-nvim;
+      #        type = "lua";
+      #        config = ''
+      #          require('lsp-zero')
+      #        '';
+      #      }
+      #
+      #      {
+      #        plugin = nvim-cmp;
+      #        type = "lua";
+      #        config = ''
+      #          local cmp = require('cmp')
+      #
+      #          vim.keymap.set("n", "C-<space>", cmp.mapping.complete())
+      #
+      #          cmp.setup({})
+      #        '';
+      #      }
 
       # Add whichkey support
       {

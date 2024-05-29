@@ -103,22 +103,24 @@ in
     hypridle = {
       enable = true;
       settings = {
-        general = let
-          grim = "${pkgs.grim}/bin/grim";
-          screenshotFiles = {
-            left = "/tmp/lockscreen-left.png";
-            right = "/tmp/lockscreen-right.png";
-          };
+        general =
+          let
+            grim = "${pkgs.grim}/bin/grim";
+            screenshotFiles = {
+              left = "/tmp/lockscreen-left.png";
+              right = "/tmp/lockscreen-right.png";
+            };
 
-          # https://github.com/hyprwm/hyprlock/issues/59#issuecomment-2023025535
-          # Need to take a screenshot with `grim` before idling
-          hyprlockCmd = "${grim} -o ${monitors.left} ${screenshotFiles.left} && ${grim} -o ${monitors.right} ${screenshotFiles.right} && ${pkgs.hyprlock}/bin/hyprlock";
-         in {
-          lock_cmd = "pidof hyprlock || ${hyprlockCmd}"; # avoid starting multiple hyprlock instances.
-          unlock_cmd = "rm -rf ${screenshotFiles.left} ${screenshotFiles.right}";
-          before_sleep_cmd = "${loginctl} lock-session";   # lock before suspend.
-          after_sleep_cmd = "${hyprctl} dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
-        };
+            # https://github.com/hyprwm/hyprlock/issues/59#issuecomment-2023025535
+            # Need to take a screenshot with `grim` before idling
+            hyprlockCmd = "${grim} -o ${monitors.left} ${screenshotFiles.left} && ${grim} -o ${monitors.right} ${screenshotFiles.right} && ${pkgs.hyprlock}/bin/hyprlock";
+          in
+          {
+            lock_cmd = "pidof hyprlock || ${hyprlockCmd}"; # avoid starting multiple hyprlock instances.
+            unlock_cmd = "rm -rf ${screenshotFiles.left} ${screenshotFiles.right}";
+            before_sleep_cmd = "${loginctl} lock-session"; # lock before suspend.
+            after_sleep_cmd = "${hyprctl} dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
+          };
 
         listener = [
           # TODO: Add screen dimming
@@ -129,8 +131,8 @@ in
 
           {
             timeout = timeUntilScreenOff;
-            on-timeout = "${hyprctl} dispatch dpms off";  # screen off when timeout has passed
-            on-resume = "${hyprctl} dispatch dpms on";    # screen on when activity is detected after timeout has fired.
+            on-timeout = "${hyprctl} dispatch dpms off"; # screen off when timeout has passed
+            on-resume = "${hyprctl} dispatch dpms on"; # screen on when activity is detected after timeout has fired.
           }
 
           {

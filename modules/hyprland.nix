@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, homeDir, ... }:
+{ lib, pkgs, user, ... }:
 {
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
@@ -74,7 +74,7 @@
     mangohud
   ];
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   xdg.portal = {
     enable = true;
