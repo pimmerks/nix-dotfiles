@@ -1,4 +1,4 @@
-{ stdenv, pkgs, ... }:
+{ pkgs, ... }:
 let
   python3Packages = pkgs.python312Packages;
 in

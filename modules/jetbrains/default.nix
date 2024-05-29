@@ -1,4 +1,4 @@
-{ user, pkgs, ... }:
+{ pkgs, ... }:
 {
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/jetbrains/bin/ides.json
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/jetbrains/bin/versions.json

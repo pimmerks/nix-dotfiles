@@ -1,4 +1,4 @@
-{ config, self, pkgs, lib, ... }:
+{ ... }:
 let
   default-dir = "Desktop/wallpapers";
   wallpapers = [
@@ -28,9 +28,11 @@ in
     };
   };
 
-  home.file = builtins.listToAttrs(
-    builtins.map(
-      w: { name = "${default-dir}/${w}"; value = { source = ./${w};}; }
-    ) wallpapers
+  home.file = builtins.listToAttrs (
+    builtins.map
+      (
+        w: { name = "${default-dir}/${w}"; value = { source = ./${w}; }; }
+      )
+      wallpapers
   );
 }

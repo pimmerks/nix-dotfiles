@@ -1,19 +1,22 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 let
   # If this is a darwin system, use `cmd`, else use `ctrl+shift`.
-  kitty_mod_key = if lib.strings.hasSuffix "darwin" pkgs.system
-                  then "cmd"
-                  else "ctrl+shift";
+  kitty_mod_key =
+    if lib.strings.hasSuffix "darwin" pkgs.system
+    then "cmd"
+    else "ctrl+shift";
 
   # If this is a darwin system, we need a bigger font.
-  kitty_font_size = if lib.strings.hasSuffix "darwin" pkgs.system
-                    then "16.0"
-                    else "11.0";
+  kitty_font_size =
+    if lib.strings.hasSuffix "darwin" pkgs.system
+    then "16.0"
+    else "11.0";
 
-  extra_pkgs = if lib.strings.hasSuffix "darwin" pkgs.system
-               then [ pkgs.terminal-notifier ]
-               else [];
+  extra_pkgs =
+    if lib.strings.hasSuffix "darwin" pkgs.system
+    then [ pkgs.terminal-notifier ]
+    else [ ];
 in
 
 {
@@ -32,8 +35,8 @@ in
 
       scrollback_lines = 10000;
 
-      bold_font        = "auto";
-      italic_font      = "auto";
+      bold_font = "auto";
+      italic_font = "auto";
       bold_italic_font = "auto";
 
       font_family = "MesloLGL Nerd Font";

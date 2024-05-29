@@ -1,4 +1,4 @@
-{ config, self, pkgs, lib, ... }: {
+{ self, pkgs, ... }: {
 
   env = [
     # Some default env vars.
@@ -32,18 +32,20 @@
     "XDG_SCREENSHOTS_DIR,~/Pictures/Screenshots"
   ];
 
-  "exec-once" = let
-    onepassword = "${pkgs._1password-gui}/bin/1password";
-    discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop";
-    spotify = "${pkgs.spotify}/bin/spotify";
-  in [
-    # Execute your favorite apps at launch
-    "${onepassword} --silent" # Startup 1password already
+  "exec-once" =
+    let
+      onepassword = "${pkgs._1password-gui}/bin/1password";
+      discord = "env -u NIXOS_OZONE_WL ${pkgs.discord}/bin/discord --use-gl=desktop";
+      spotify = "${pkgs.spotify}/bin/spotify";
+    in
+    [
+      # Execute your favorite apps at launch
+      "${onepassword} --silent" # Startup 1password already
 
-    # Startup other tools
-    "[workspace 5 silent] ${discord}"
-    "[workspace 5 silent] ${spotify}"
-  ];
+      # Startup other tools
+      "[workspace 5 silent] ${discord}"
+      "[workspace 5 silent] ${spotify}"
+    ];
 
   "$mainMod" = "SUPER";
 
@@ -184,10 +186,12 @@
   ];
 
   # Keybindings even when locked
-  bindl = let
-    volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
-    playerctl = "${pkgs.playerctl}/bin/playerctl";
-  in [
+  bindl =
+    let
+      volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
+      playerctl = "${pkgs.playerctl}/bin/playerctl";
+    in
+    [
       ", XF86AudioRaiseVolume, exec, ${volume-control} up"
       ", XF86AudioLowerVolume, exec, ${volume-control} down"
       ", XF86AudioMute,        exec, ${volume-control} mute"
@@ -195,87 +199,87 @@
       ", XF86AudioPlay, exec, ${playerctl} play-pause"
       ", XF86AudioPrev, exec, ${playerctl} previous"
       ", XF86AudioNext, exec, ${playerctl} next"
-  ];
+    ];
 
   # Keybindings
-  bind = let
-    onepassword = "${pkgs._1password-gui}/bin/1password";
-    hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
-    gnome-system-monitor = "${pkgs.gnome.gnome-system-monitor}/bin/gnome-system-monitor";
-    kitty = "${pkgs.kitty}/bin/kitty";
-    playerctl = "${pkgs.playerctl}/bin/playerctl";
-    rofi = "${pkgs.rofi-wayland}/bin/rofi";
+  bind =
+    let
+      onepassword = "${pkgs._1password-gui}/bin/1password";
+      hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
+      gnome-system-monitor = "${pkgs.gnome.gnome-system-monitor}/bin/gnome-system-monitor";
+      kitty = "${pkgs.kitty}/bin/kitty";
+      rofi = "${pkgs.rofi-wayland}/bin/rofi";
 
-    screenshot-copy = "${self.packages.${pkgs.system}.screenshot-copy}/bin/screenshot-copy";
-    volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
-    cliphist-rofi = "${self.packages.${pkgs.system}.cliphist-rofi}/bin/cliphist-rofi";
-    power-menu-rofi = "${self.packages.${pkgs.system}.power-menu-rofi}/bin/power-menu-rofi";
-    monitor-brightness = "${self.packages.${pkgs.system}.monitor-brightness}/bin/monitor-brightness";
-  in [
-    "$mainMod, Q, killactive,"
-    "$mainMod, RETURN, exec, ${kitty}"
+      screenshot-copy = "${self.packages.${pkgs.system}.screenshot-copy}/bin/screenshot-copy";
+      cliphist-rofi = "${self.packages.${pkgs.system}.cliphist-rofi}/bin/cliphist-rofi";
+      power-menu-rofi = "${self.packages.${pkgs.system}.power-menu-rofi}/bin/power-menu-rofi";
+      monitor-brightness = "${self.packages.${pkgs.system}.monitor-brightness}/bin/monitor-brightness";
+    in
+    [
+      "$mainMod, Q, killactive,"
+      "$mainMod, RETURN, exec, ${kitty}"
 
-    # Try to mimick some kind of alt-tab, not working atm...
-#    "ALT, TAB, exec, rofi -show window -kb-accept-entry \"Tab,!Alt+Alt_L\" -kb-row-down \"Alt+Tab\" -selected-row 1 -kb-element-next \"Down\""
-    "ALT, TAB, cyclenext"
-    "ALT, Tab, bringactivetotop"
+      # Try to mimick some kind of alt-tab, not working atm...
+      #    "ALT, TAB, exec, rofi -show window -kb-accept-entry \"Tab,!Alt+Alt_L\" -kb-row-down \"Alt+Tab\" -selected-row 1 -kb-element-next \"Down\""
+      "ALT, TAB, cyclenext"
+      "ALT, Tab, bringactivetotop"
 
-    "ALT, SPACE, exec, ${rofi} -show drun"
-    "ALT, SPACE, focuswindow, title:(rofi), floating"
+      "ALT, SPACE, exec, ${rofi} -show drun"
+      "ALT, SPACE, focuswindow, title:(rofi), floating"
 
-    "$mainMod, T, togglefloating,"
-    "$mainMod, P, pseudo," # dwindle
-    "$mainMod, G, togglesplit," # dwindle
-    "$mainMod, S, togglegroup"
-    "$mainMod, F, fullscreen,1"
-    "$mainMod SHIFT, F, fullscreen,0"
+      "$mainMod, T, togglefloating,"
+      "$mainMod, P, pseudo," # dwindle
+      "$mainMod, G, togglesplit," # dwindle
+      "$mainMod, S, togglegroup"
+      "$mainMod, F, fullscreen,1"
+      "$mainMod SHIFT, F, fullscreen,0"
 
-    "$mainMod, L, exec, ${power-menu-rofi}" # Open power menu
+      "$mainMod, L, exec, ${power-menu-rofi}" # Open power menu
 
-    "ALTCTRL, DELETE, exec, ${gnome-system-monitor}"
+      "ALTCTRL, DELETE, exec, ${gnome-system-monitor}"
 
-    "SUPER, V, exec, ${rofi} -modi clipboard:${cliphist-rofi} -show clipboard"
-    "CTRLSHIFT, SPACE, exec, ${onepassword} --quick-access"
+      "SUPER, V, exec, ${rofi} -modi clipboard:${cliphist-rofi} -show clipboard"
+      "CTRLSHIFT, SPACE, exec, ${onepassword} --quick-access"
 
-    ", XF86MonBrightnessUp,   exec, ${monitor-brightness} up"
-    ", XF86MonBrightnessDown, exec, ${monitor-brightness} down"
+      ", XF86MonBrightnessUp,   exec, ${monitor-brightness} up"
+      ", XF86MonBrightnessDown, exec, ${monitor-brightness} down"
 
-    # Colorpicker one mainMod + printscreen
-    "$mainMod, Print, exec, ${hyprpicker} --autocopy --no-fancy"
-    ", Print, exec, ${screenshot-copy}"
+      # Colorpicker one mainMod + printscreen
+      "$mainMod, Print, exec, ${hyprpicker} --autocopy --no-fancy"
+      ", Print, exec, ${screenshot-copy}"
 
-    # Move focus with mainMod + arrow keys
-    "$mainMod, left,  movefocus, l"
-    "$mainMod, right, movefocus, r"
-    "$mainMod, up,    movefocus, u"
-    "$mainMod, down,  movefocus, d"
+      # Move focus with mainMod + arrow keys
+      "$mainMod, left,  movefocus, l"
+      "$mainMod, right, movefocus, r"
+      "$mainMod, up,    movefocus, u"
+      "$mainMod, down,  movefocus, d"
 
-    # Move windows around left and right
-    "$mainMod SHIFT, left, movewindow, l"
-    "$mainMod SHIFT, right, movewindow, r"
+      # Move windows around left and right
+      "$mainMod SHIFT, left, movewindow, l"
+      "$mainMod SHIFT, right, movewindow, r"
 
-    # Switch workspaces with mainMod + [0-9]
-    "$mainMod, 1, workspace, 1"
-    "$mainMod, 2, workspace, 2"
-    "$mainMod, 3, workspace, 3"
-    "$mainMod, 4, workspace, 4"
-    "$mainMod, 5, workspace, 5"
-    "$mainMod, 6, workspace, 6"
-    "$mainMod, 7, workspace, 7"
-    "$mainMod, 8, workspace, 8"
-    "$mainMod, 9, workspace, 9"
-    "$mainMod, 0, workspace, 10"
+      # Switch workspaces with mainMod + [0-9]
+      "$mainMod, 1, workspace, 1"
+      "$mainMod, 2, workspace, 2"
+      "$mainMod, 3, workspace, 3"
+      "$mainMod, 4, workspace, 4"
+      "$mainMod, 5, workspace, 5"
+      "$mainMod, 6, workspace, 6"
+      "$mainMod, 7, workspace, 7"
+      "$mainMod, 8, workspace, 8"
+      "$mainMod, 9, workspace, 9"
+      "$mainMod, 0, workspace, 10"
 
-    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-    "$mainMod SHIFT, 1, movetoworkspace, 1"
-    "$mainMod SHIFT, 2, movetoworkspace, 2"
-    "$mainMod SHIFT, 3, movetoworkspace, 3"
-    "$mainMod SHIFT, 4, movetoworkspace, 4"
-    "$mainMod SHIFT, 5, movetoworkspace, 5"
-    "$mainMod SHIFT, 6, movetoworkspace, 6"
-    "$mainMod SHIFT, 7, movetoworkspace, 7"
-    "$mainMod SHIFT, 8, movetoworkspace, 8"
-    "$mainMod SHIFT, 9, movetoworkspace, 9"
-    "$mainMod SHIFT, 0, movetoworkspace, 10"
-  ];
+      # Move active window to a workspace with mainMod + SHIFT + [0-9]
+      "$mainMod SHIFT, 1, movetoworkspace, 1"
+      "$mainMod SHIFT, 2, movetoworkspace, 2"
+      "$mainMod SHIFT, 3, movetoworkspace, 3"
+      "$mainMod SHIFT, 4, movetoworkspace, 4"
+      "$mainMod SHIFT, 5, movetoworkspace, 5"
+      "$mainMod SHIFT, 6, movetoworkspace, 6"
+      "$mainMod SHIFT, 7, movetoworkspace, 7"
+      "$mainMod SHIFT, 8, movetoworkspace, 8"
+      "$mainMod SHIFT, 9, movetoworkspace, 9"
+      "$mainMod SHIFT, 0, movetoworkspace, 10"
+    ];
 }

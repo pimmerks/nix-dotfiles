@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.home-manager.enable = true;
@@ -6,10 +6,10 @@
   # Packages that should be installed to the user profile.
   home.packages = [
     pkgs.zsh-autosuggestions
-    pkgs.fasd       # needed for 'z' jump-around
-    pkgs.ripgrep    # Faster grep
-    pkgs.fd         # Faster find
-    pkgs.bat        # Better cat
+    pkgs.fasd # needed for 'z' jump-around
+    pkgs.ripgrep # Faster grep
+    pkgs.fd # Faster find
+    pkgs.bat # Better cat
     pkgs.difftastic # Better diffing
   ];
 
@@ -64,7 +64,7 @@
           "aliases"
           "colored-man-pages"
           "command-not-found"
-#          "zsh-autosuggestions"
+          #          "zsh-autosuggestions"
           "nvm"
           "1password"
           "macos"

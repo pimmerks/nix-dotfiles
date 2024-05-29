@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }: {
+{ config, pkgs, ... }: {
   # Bootloader.
   boot = {
     supportedFilesystems = [ "ntfs" ];
@@ -25,9 +25,9 @@
         };
       };
 
-#      systemd-boot = {
-#        enable = true;
-#      };
+      #      systemd-boot = {
+      #        enable = true;
+      #      };
     };
   };
 }

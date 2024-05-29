@@ -47,8 +47,8 @@ hmnews: clean
 clean:
 	@rm -rf $(ROOT_DIR)/result
 
-.PHONY: check
-check:
+.PHONY: info
+info:
 	@echo "User:                $(USER)"
 	@echo "Hostname:            $(HOSTNAME)"
 	@echo "Home Manager Flake:  $(HM_FLAKE)"
@@ -66,3 +66,7 @@ fix:
 .PHONY: update
 update:
 	$(NIX_CMD) flake update --commit-lock-file --commit-lockfile-summary "chore(deps): update flake.lock"
+
+.PHONY: check
+check:
+	$(NIX_CMD) flake check
