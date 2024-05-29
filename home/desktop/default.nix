@@ -12,6 +12,8 @@ let
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   systemctl = "${pkgs.systemd}/bin/systemctl";
+
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
 in
 {
   imports = [
@@ -60,13 +62,33 @@ in
       label = [
         {
           monitor = "";
-          size = "200, 50";
           text = "cmd[update:1000] date +%T";
           color = "rgb(255, 255, 255)";
-          position = "0, 0";
+          font_size = 64;
+          font_family = "JetBrainsMono Nerd Font";
+          shadow_passes = 3;
+          shadow_size = 4;
+
+          position = "0, 16";
           halign = "center";
           valign = "center";
         }
+
+        {
+          monitor = "";
+          text = ''cmd[update:1000] ${playerctl} metadata --format "Now playing: {{ artist }} - {{ title }}"'';
+          color = "rgb(255, 255, 255)";
+
+          font_size = 24;
+          font_family = "JetBrainsMono Nerd Font";
+          shadow_passes = 3;
+          shadow_size = 4;
+
+          position = "10, -40";
+          halign = "left";
+          valign = "bottom";
+        }
+
       ];
 
       input-field = [
@@ -113,7 +135,7 @@ in
           # https://github.com/hyprwm/hyprlock/issues/59#issuecomment-2023025535
           # Need to take a screenshot with `grim` before idling
           hyprlockCmd = "${grim} -o ${monitors.left} ${screenshotFiles.left} && ${grim} -o ${monitors.right} ${screenshotFiles.right} && ${pkgs.hyprlock}/bin/hyprlock";
-         in {
+        in {
           lock_cmd = "pidof hyprlock || ${hyprlockCmd}"; # avoid starting multiple hyprlock instances.
           unlock_cmd = "rm -rf ${screenshotFiles.left} ${screenshotFiles.right}";
           before_sleep_cmd = "${loginctl} lock-session";   # lock before suspend.
