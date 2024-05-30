@@ -6,7 +6,7 @@
 
     # Nvidia
     "WLR_NO_HARDWARE_CURSORS,1"
-    "WLR_RENDERER,vulkan"
+    # "WLR_RENDERER,vulkan" # disabled because of Hyprland 0.40.x
     "WLR_DRM_NO_ATOMIC,1" # use legacy DRM interface instead of atomic mode setting. Might fix flickering issues.
     "WLR_BACKEND,vulkan"
 
