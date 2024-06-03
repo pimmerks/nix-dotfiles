@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs; [
     # Kubernetes
     kubectl
+    kubelogin-oidc
     kubectx
     kubernetes-helm
     kubernetes-helmPlugins.helm-diff
