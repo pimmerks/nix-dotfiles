@@ -48,9 +48,9 @@ in
         #
         modules-right = [
           "tray"
-          "temperature"
-          "cpu"
-          "memory"
+#          "temperature"
+#          "cpu"
+#          "memory"
           "pulseaudio#microphone"
           "pulseaudio#audio"
           "idle_inhibitor"
@@ -62,22 +62,22 @@ in
           spacing = 10;
         };
 
-        temperature = {
-          format = " {temperatureC}°C";
-          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-        };
-
-        cpu = {
-          format = "󰻠 {usage}%";
-          on-click = "";
-          tooltip = false;
-        };
-
-        memory = {
-          format = "󰍛 {percentage}%";
-          on-click = "";
-          tooltip = false;
-        };
+#        temperature = {
+#          format = " {temperatureC}°C";
+#          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+#        };
+#
+#        cpu = {
+#          format = "󰻠 {usage}%";
+#          on-click = "";
+#          tooltip = false;
+#        };
+#
+#        memory = {
+#          format = "󰍛 {percentage}%";
+#          on-click = "";
+#          tooltip = false;
+#        };
 
         "pulseaudio#microphone" = {
           format = "{format_source}";

@@ -9,15 +9,25 @@ let
 
   #  playerctl metadata mpris:artUrl | sed "s/open\.spotify\.com/i.scdn.co/"
   script = pkgs.writeShellScriptBin "${scriptName}" ''
-    ALBUM_URL=$(${playerctl} metadata mpris:artUrl | ${sed} "s/open\.spotify\.com/i.scdn.co/")
+    ALBUM_URL="$(${playerctl} metadata mpris:artUrl)"
+    ALBUM_ID="$(echo $ALBUM_URL | awk -F '/' '{print $NF}')"
+    FILE=/tmp/now-playing-$ALBUM_ID
 
     if [[ -z $ALBUM_URL ]]; then
       exit 0
     fi
 
-    ${curl} $ALBUM_URL > /tmp/now-playing-album-raw
-    ${convert} /tmp/now-playing-album-raw /tmp/now-playing.jpg
-    echo /tmp/now-playing.jpg
+    if [[ -f "$FILE" ]]; then
+      printf $FILE.png
+      exit 0
+    fi
+
+    ${curl} -s $ALBUM_URL > $FILE
+    # Convert the image to png
+    ${convert} -format png $FILE $FILE.png
+    rm -f $FILE
+    ln -fs $FILE.png /tmp/now-playing.png
+    printf "$FILE.png"
   '';
 
 in stdenv.mkDerivation {

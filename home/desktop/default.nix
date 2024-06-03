@@ -20,6 +20,7 @@ in
     ./mako.nix
     ./waybar
     ./wallpapers
+    ./hyprlock.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -30,83 +31,6 @@ in
     systemd.enable = true;
 
     settings = import ./hyprland-config.nix { inherit config self pkgs lib; };
-  };
-
-  programs.hyprlock = {
-    enable = true;
-    settings = {
-      general = {
-        hide_cursor = true;
-        grace = timeUntilLock - timeUntilScreenOff;
-        ignore_empty_input = true;
-        no_fade_out = true; # bit buggy, so disable it
-      };
-
-      background = [
-        {
-          monitor = monitors.left;
-          path = "/tmp/lockscreen-left.png";
-          blur_passes = 3;
-          blur_size = 8;
-          color = "rgb(0,0,0)";
-        }
-        {
-          monitor = monitors.right;
-          path = "/tmp/lockscreen-right.png";
-          blur_passes = 3;
-          blur_size = 8;
-          color = "rgb(0,0,0)";
-        }
-      ];
-
-      label = [
-        {
-          monitor = "";
-          text = "cmd[update:1000] date +%T";
-          color = "rgb(255, 255, 255)";
-          font_size = 64;
-          font_family = "JetBrainsMono Nerd Font";
-          shadow_passes = 3;
-          shadow_size = 4;
-
-          position = "0, 16";
-          halign = "center";
-          valign = "center";
-        }
-
-        {
-          monitor = "";
-          text = ''cmd[update:1000] ${playerctl} metadata --format "Now playing: {{ artist }} - {{ title }}"'';
-          color = "rgb(255, 255, 255)";
-
-          font_size = 24;
-          font_family = "JetBrainsMono Nerd Font";
-          shadow_passes = 3;
-          shadow_size = 4;
-
-          position = "10, -40";
-          halign = "left";
-          valign = "bottom";
-        }
-
-      ];
-
-      input-field = [
-        {
-          size = "250, 40";
-          position = "0, -80";
-          monitor = "";
-          dots_center = true;
-          fade_on_empty = false;
-          font_color = "rgb(202, 211, 245)";
-          inner_color = "rgb(91, 96, 120)";
-          outer_color = "rgb(24, 25, 38)";
-          outline_thickness = 5;
-          placeholder_text = ''<span foreground="##cad3f5">Password...</span>'';
-          shadow_passes = 2;
-        }
-      ];
-    };
   };
 
   services = {
