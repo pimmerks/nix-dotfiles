@@ -56,5 +56,8 @@
     # Terraform
     terraform
     terraform-docs
+
+    # OPA
+    open-policy-agent
   ];
 }
