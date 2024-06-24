@@ -8,10 +8,6 @@ if [[ -z "$VERSION" ]]; then
   exit 1
 fi
 
-CURL=$(which curl)
-AWK=$(which awk)
-
-echo "Path: $PATH, $CURL, $AWK"
 echo "Version: $VERSION"
 
 GOLAND_SHA=$(curl -sS https://download.jetbrains.com/go/goland-$VERSION.tar.gz.sha256 | awk '{print $1}')

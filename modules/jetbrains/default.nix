@@ -6,18 +6,18 @@
 
   environment.systemPackages = with pkgs; [
     (jetbrains.goland.overrideAttrs {
-      version = "2024.1";
+      version = "2024.1.4";
       src = fetchurl {
-        url = "https://download.jetbrains.com/go/goland-2024.1.tar.gz";
-        sha256 = "783539f254e4d62f4fae153a9e737f1d69db1e44676c4d1513775571a68950e4";
+        url = "https://download.jetbrains.com/go/goland-2024.1.4.tar.gz";
+        sha256 = "f982476c9d870f1f354ab15135094cbde5c25c851ec21f424d0cd24149a12be6";
       };
     })
 
     (jetbrains.webstorm.overrideAttrs {
-      version = "2024.1";
+      version = "2024.1.4";
       src = fetchurl {
-        url = "https://download.jetbrains.com/webstorm/WebStorm-2024.1.tar.gz";
-        sha256 = "d4c7cb7f1462c2b2bd9042b4714ab9de66c455ab9752c87698dc3902f0d49a2a";
+        url = "https://download.jetbrains.com/webstorm/WebStorm-2024.1.4.tar.gz";
+        sha256 = "d22f38c8c02520deef21a57f3c85800dcf44a2ace8174a6dd0daa0a2789d5657";
       };
     })
   ];
