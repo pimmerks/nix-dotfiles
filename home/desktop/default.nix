@@ -18,6 +18,7 @@ in
     ./mako.nix
     ./waybar
     ./wallpapers
+    ./apps.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
