@@ -1,13 +1,12 @@
 { config, self, pkgs, lib, ... }:
 let
-  default-dir = "Desktop/wallpapers";
   wallpapers = [
-    "nixos-wallpaper-catppuccin-mocha.png"
-    "rolling-fog-left.jpg"
-    "rolling-fog-right.jpg"
+    ./nixos-wallpaper-catppuccin-mocha.png
+    ./rolling-fog-left.jpg
+    ./rolling-fog-right.jpg
   ];
 
-  mkWallpaperDir = file: "~/${default-dir}/${file}";
+  mkWallpaperDir = file: "${file}";
 
   preloads = builtins.map (w: mkWallpaperDir w) wallpapers;
 in
@@ -21,16 +20,9 @@ in
       preload = preloads;
 
       wallpaper = [
-        # manual for now... :(
         "HDMI-A-2, ${mkWallpaperDir (builtins.elemAt wallpapers 1)}"
         "HDMI-A-1, ${mkWallpaperDir (builtins.elemAt wallpapers 2)}"
       ];
     };
   };
-
-  home.file = builtins.listToAttrs(
-    builtins.map(
-      w: { name = "${default-dir}/${w}"; value = { source = ./${w};}; }
-    ) wallpapers
-  );
 }

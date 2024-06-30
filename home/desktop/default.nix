@@ -5,11 +5,15 @@ let
     right = "HDMI-A-1";
   };
 
+  # 5 minutes until lock,
+  # 5:30 minutes until screen off
+  # 30 minutes until sleep
   timeUntilLock = 5 * 60;
   timeUntilScreenOff = timeUntilLock + 30;
   timeUntilSuspend = 30 * 60;
 
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   systemctl = "${pkgs.systemd}/bin/systemctl";
 in
@@ -35,45 +39,58 @@ in
     enable = true;
     settings = {
       general = {
-        hide_cursor = true;
-        grace = timeUntilLock - timeUntilScreenOff;
+        hide_cursor = false;
+        grace = 2;
         ignore_empty_input = true;
-        no_fade_out = true; # bit buggy, so disable it
       };
 
       background = [
         {
           monitor = monitors.left;
-          path = "/tmp/lockscreen-left.png";
-          blur_passes = 3;
+          path = "${./wallpapers/rolling-fog-left.jpg}";
+          blur_passes = 1;
           blur_size = 8;
           color = "rgb(0,0,0)";
         }
         {
           monitor = monitors.right;
-          path = "/tmp/lockscreen-right.png";
-          blur_passes = 3;
+          path = "${./wallpapers/rolling-fog-right.jpg}";
+          blur_passes = 1;
           blur_size = 8;
           color = "rgb(0,0,0)";
         }
       ];
 
       label = [
-        {
+        { # Show time
           monitor = "";
-          size = "200, 50";
-          text = "cmd[update:1000] date +%T";
+          text = "$TIME";
           color = "rgb(255, 255, 255)";
           position = "0, 0";
+          font_size = 20;
           halign = "center";
           valign = "center";
+          shadow_passes = 2;
+        }
+
+        { # Show date
+          monitor = "";
+          text = "cmd[update:60000] date \"+%A - %F\"";
+          color = "rgb(255, 255, 255)";
+          position = "0, 0";
+          font_size = 12;
+          halign = "left";
+          valign = "bottom";
+          shadow_passes = 1;
         }
       ];
 
       input-field = [
         {
+          halign = "center";
+          valign = "bottom";
           size = "250, 40";
-          position = "0, -80";
+          position = "0, 80";
           monitor = "";
           dots_center = true;
           fade_on_empty = false;
@@ -104,36 +121,22 @@ in
     hypridle = {
       enable = true;
       settings = {
-        general = let
-          grim = "${pkgs.grim}/bin/grim";
-          screenshotFiles = {
-            left = "/tmp/lockscreen-left.png";
-            right = "/tmp/lockscreen-right.png";
-          };
-
-          # https://github.com/hyprwm/hyprlock/issues/59#issuecomment-2023025535
-          # Need to take a screenshot with `grim` before idling
-          hyprlockCmd = "${grim} -o ${monitors.left} ${screenshotFiles.left} && ${grim} -o ${monitors.right} ${screenshotFiles.right} && ${pkgs.hyprlock}/bin/hyprlock";
-         in {
-          lock_cmd = "pidof hyprlock || ${hyprlockCmd}"; # avoid starting multiple hyprlock instances.
-          unlock_cmd = "rm -rf ${screenshotFiles.left} ${screenshotFiles.right}";
+        general = {
+          lock_cmd = "pgrep hyprlock || ${hyprlock}"; # avoid starting multiple hyprlock instances.
           before_sleep_cmd = "${loginctl} lock-session";   # lock before suspend.
           after_sleep_cmd = "${hyprctl} dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
         };
 
         listener = [
-          # TODO: Add screen dimming
           {
             timeout = timeUntilLock;
-            on-timeout = "${loginctl} lock-session"; # lock screen when timeout has passed
+            on-timeout = "${loginctl} lock-session";
           }
-
           {
             timeout = timeUntilScreenOff;
-            on-timeout = "${hyprctl} dispatch dpms off";  # screen off when timeout has passed
-            on-resume = "${hyprctl} dispatch dpms on";    # screen on when activity is detected after timeout has fired.
+            on-timeout = "${hyprctl} dispatch dpms off";
+            on-resume = "${hyprctl} dispatch dpms on";
           }
-
           {
             timeout = timeUntilSuspend;
             on-timeout = "${systemctl} suspend"; # suspend pc
