@@ -99,6 +99,7 @@
     cifs-utils
     easyeffects
     solaar # Logitech mouse management
+    pavucontrol # Controls for sound.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
