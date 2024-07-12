@@ -33,10 +33,10 @@ let
         muted="$(${pamixer} --default-source --get-mute)"
         if $muted; then
             ${pamixer} --default-source -u
-            ${notify-send} -t 750 -a "Volume" -u low "Unmuted"
+            ${notify-send} -t 1000 -a "Volume" -u low "Unmuted"
         else
             ${pamixer} --default-source -m
-            ${notify-send} -t 750 -a "Volume" -u low "Muted"
+            ${notify-send} -t 1000 -a "Volume" -u low "Muted"
         fi
     }
 

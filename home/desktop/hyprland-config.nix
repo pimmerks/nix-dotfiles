@@ -195,6 +195,9 @@
       ", XF86AudioPlay, exec, ${playerctl} play-pause"
       ", XF86AudioPrev, exec, ${playerctl} previous"
       ", XF86AudioNext, exec, ${playerctl} next"
+
+      # Keychron K8 has a microphone button, that actually emits SUPER+C
+      "SUPER, C,        exec, ${volume-control} mutemic"
   ];
 
   # Keybindings
