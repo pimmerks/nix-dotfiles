@@ -13,7 +13,7 @@
     spice
     spice-gtk
     spice-protocol
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
   ];
 
   # Manage the virtualisation services

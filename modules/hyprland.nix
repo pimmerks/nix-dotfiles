@@ -61,12 +61,12 @@
     qt6.qtwayland
 
     # File browsing + Gnome stuff
-    gnome.nautilus
-    gnome.file-roller
-    gnome.eog # Image viewer
-    gnome.gnome-font-viewer
-    gnome.gnome-calculator
-    gnome.gnome-system-monitor
+    nautilus
+    file-roller
+    eog # Image viewer
+    gnome-font-viewer
+    gnome-calculator
+    gnome-system-monitor
 
     vlc # media player
 

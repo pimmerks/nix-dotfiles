@@ -118,12 +118,11 @@
   dwindle = {
     pseudotile = 1;
     preserve_split = 1;
-    no_gaps_when_only = true;
+    no_gaps_when_only = 1;
   };
 
   master = {
-    new_is_master = true;
-    no_gaps_when_only = true;
+    no_gaps_when_only = 1;
   };
 
   misc = {
@@ -202,7 +201,7 @@
   bind = let
     onepassword = "${pkgs._1password-gui}/bin/1password";
     hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
-    gnome-system-monitor = "${pkgs.gnome.gnome-system-monitor}/bin/gnome-system-monitor";
+    gnome-system-monitor = "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor";
     kitty = "${pkgs.kitty}/bin/kitty";
     playerctl = "${pkgs.playerctl}/bin/playerctl";
     rofi = "${pkgs.rofi-wayland}/bin/rofi";
