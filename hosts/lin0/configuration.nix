@@ -98,6 +98,7 @@
   environment.systemPackages = with pkgs; [
     cifs-utils
     easyeffects
+    solaar # Logitech mouse management
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
