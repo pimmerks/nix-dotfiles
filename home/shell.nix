@@ -30,6 +30,14 @@
       autocd = true;
 
       enableCompletion = true;
+      enableVteIntegration = true;
+
+      history = {
+        size = 100000;
+        share = false;
+        ignoreDups = true;
+        extended = true;
+      };
 
       autosuggestion = {
         enable = true;
