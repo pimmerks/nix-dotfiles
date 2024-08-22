@@ -93,6 +93,9 @@ in
       # Parsing system for languages, better highlighting
       nvim-treesitter-with-plugins
 
+      # Use for some ui components
+      # nvchad-ui
+
       # Add file explorer
       {
         plugin = nvim-tree-lua;
@@ -160,15 +163,21 @@ in
           })
         '';
       }
-#
-#      # It's important that you set up the plugins in the following order:
-#      #
-#      #    mason.nvim
-#      #    mason-lspconfig.nvim
-#      #    Setup servers via lspconfig
-#      #
-#      #Pay extra attention to this if you lazy-load plugins, or somehow "chain" the loading of plugins via your plugin manager.
-#
+      {
+        plugin = gitsigns-nvim;
+        type = "lua";
+        config = ''
+          require('gitsigns').setup()
+        '';
+      }
+
+      # It's important that you set up the plugins in the following order:
+      #
+      #    mason.nvim
+      #    mason-lspconfig.nvim
+      #    Setup servers via lspconfig
+      #
+      # Pay extra attention to this if you lazy-load plugins, or somehow "chain" the loading of plugins via your plugin manager.
       {
         plugin = mason-nvim;
         type = "lua";
@@ -176,7 +185,6 @@ in
           require("mason").setup()
         '';
       }
-
       {
         plugin = cmp-nvim-lsp;
         type = "lua";
@@ -295,17 +303,25 @@ in
             cmd = {"/nix/store/gsyj23nm76scqjd4jgwq74v03m02k3rj-esp-clang-esp-idf-v5.1.3/bin/clangd", "--clang-tidy"},
             -- on_attach = custom_on_attach,
           }
+
+          lspconfig.lua_ls.setup {
+            capabilities = capabilities,
+            settings = {
+              diagnostics = {
+                globals = { "vim" },
+              },
+              workspace = {
+                library = {
+                  vim.fn.expand "$VIMRUNTIME/lua",
+                  vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
+                },
+                maxPreload = 100000,
+                preloadFileSize = 10000,
+              },
+            },
+          }
         '';
       }
-
-#      {
-#        plugin = lsp-zero-nvim;
-#        type = "lua";
-#        config = ''
-#          require('lsp-zero')
-#        '';
-#      }
-      # cmp-nvim-lsp
 
       {
         plugin = nvim-cmp;
@@ -331,7 +347,7 @@ in
               format = function(entry, item)
                 local menu_icon = {
                   nvim_lsp = 'λ',
-                  luasnip = '⋗',
+                  vsnip = '⋗',
                   buffer = 'Ω',
                   path = '🖫',
                 }
@@ -342,7 +358,8 @@ in
             },
             sources = cmp.config.sources({
               { name = 'nvim_lsp' },
-              { name = 'path'},
+              -- { name = 'vsnip' },
+              { name = 'path' },
             }, {
               { name = 'buffer' },
             })
