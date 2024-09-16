@@ -52,6 +52,7 @@
     dapr-cli
     supabase-cli
     stripe-cli
+    azure-cli
 
     # Terraform
     terraform
@@ -59,5 +60,9 @@
 
     # OPA
     open-policy-agent
+
+    # Ansible
+    ansible
+    ansible-lint
   ];
 }
