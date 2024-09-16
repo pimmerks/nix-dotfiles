@@ -36,6 +36,7 @@
     gh
     dapr-cli
     argocd
+    azure-cli # Azure
 
     # Kubernetes
     kubectl
