@@ -50,5 +50,9 @@
     # Terraform
     terraform
     terraform-docs
+
+    # Ansible
+    ansible
+    ansible-lint
   ];
 }
