@@ -64,5 +64,6 @@
     # Ansible
     ansible
     ansible-lint
+    sshpass
   ];
 }
