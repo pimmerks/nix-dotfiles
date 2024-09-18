@@ -103,6 +103,7 @@ in
         config = ''
           vim.keymap.set("n", "<Leader>v", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file browser" })
           vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Focus file browser" })
+          vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeClose<CR>", { desc = "Close file browser" })
 
           require("nvim-tree").setup({
             disable_netrw = true,
