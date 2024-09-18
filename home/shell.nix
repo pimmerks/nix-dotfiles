@@ -38,7 +38,7 @@
       extraConfig = ''
         bind '"' split-window -c "#{pane_current_path}"
         bind % split-window -hc "#{pane_current_path}"
-        bind c new-window -c "#{pane_current_path}"
+        # bind c new-window -c "#{pane_current_path}"
       '';
 
       plugins = with pkgs; [
