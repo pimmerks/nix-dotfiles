@@ -65,5 +65,10 @@
     ansible
     ansible-lint
     sshpass
+
+    # Python
+    ruff
+    ruff-lsp
+    pyright
   ];
 }
