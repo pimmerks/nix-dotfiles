@@ -109,6 +109,7 @@
         ll = "ls -alh";
         ".." = "cd ..";
         dc = "docker compose";
+        tf = "terraform";
 
         # Alias cat to bat, but keep it mostly plain for easy copy/pasting etc
         "cat" = "bat --style=plain --paging=never";
