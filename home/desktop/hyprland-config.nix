@@ -165,7 +165,7 @@
     "float, class:$(Rofi)^"
     "stayfocused, class:$(Rofi)^"
     "dimaround, class:$(Rofi)^"
-    "forceinput, class:$(Rofi)^"
+    # "forceinput, class:$(Rofi)^"
     "pin, class:$(Rofi)^"
   ];
 
