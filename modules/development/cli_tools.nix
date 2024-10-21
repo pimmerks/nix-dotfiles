@@ -57,6 +57,7 @@
     # Terraform
     terraform
     terraform-docs
+    opentofu
 
     # OPA
     open-policy-agent
