@@ -39,20 +39,6 @@
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs { inherit pkgs; });
 
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Pims-MacBook-Pro
-    darwinConfigurations."Pims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [
-        ./hosts/Pims-MacBook-Pro/configuration.nix
-        ./modules/common.nix
-        ./modules/cli_tools.nix
-      ];
-      specialArgs = {
-        user = "pimmer";
-        inherit self inputs outputs;
-      };
-    };
-
     # New MBP M3 - Arm chip
     darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";

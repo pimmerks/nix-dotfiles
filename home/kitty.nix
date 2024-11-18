@@ -21,7 +21,7 @@ in
 
   programs.kitty = {
     enable = true;
-    theme = "Ayu";
+    themeFile = "Ayu";
 
     shellIntegration = {
       enableZshIntegration = true;
