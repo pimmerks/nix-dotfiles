@@ -12,6 +12,7 @@
     pkgs.bat        # Better cat
     pkgs.difftastic # Better diffing
     pkgs.pre-commit # Pre-commit hooks for git repositories
+    pkgs.uv # Python package manager
   ];
 
   programs = {

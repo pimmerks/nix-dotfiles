@@ -300,8 +300,8 @@ in
 
           lspconfig.clangd.setup {
             capabilities = capabilities,
-            -- cmd = {"${pkgs.clang-tools}/bin/clangd", "--clang-tidy"},
-            cmd = {"/nix/store/gsyj23nm76scqjd4jgwq74v03m02k3rj-esp-clang-esp-idf-v5.1.3/bin/clangd", "--clang-tidy"},
+            cmd = {"clangd", "--clang-tidy"},
+            -- cmd = {"/nix/store/gsyj23nm76scqjd4jgwq74v03m02k3rj-esp-clang-esp-idf-v5.1.3/bin/clangd", "--clang-tidy"},
             -- on_attach = custom_on_attach,
           }
 
