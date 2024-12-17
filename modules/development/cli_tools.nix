@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, stablePkgs, ... }:
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     # VCS
-    git
+    stablePkgs.git
 
     # Editors
     vim
@@ -41,7 +41,7 @@
     gotop
 
     # network
-    curl
+    stablePkgs.curl
     wget
     dig
 

@@ -13,6 +13,7 @@
     pkgs.difftastic # Better diffing
     pkgs.pre-commit # Pre-commit hooks for git repositories
     pkgs.uv # Python package manager
+    pkgs.minio-client # S3 cli client
   ];
 
   programs = {

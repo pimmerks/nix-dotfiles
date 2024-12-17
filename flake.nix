@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -20,7 +21,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, hyprland }:
+  outputs = inputs@{ self, nixpkgs, nix-stable, nix-darwin, home-manager, hyprland }:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
@@ -35,6 +36,11 @@
         config.allowUnfree = true;
       });
 
+    stablePkgsFor = lib.genAttrs systems (system:
+      import nix-stable {
+        inherit system;
+        config.allowUnfree = true;
+      });
   in {
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs { inherit pkgs; });
@@ -56,6 +62,7 @@
       specialArgs = {
         user = "pimmer";
         inherit self inputs outputs;
+        stablePkgs = stablePkgsFor.aarch64-darwin;
       };
     };
 
