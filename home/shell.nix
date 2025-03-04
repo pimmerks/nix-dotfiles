@@ -35,12 +35,15 @@
       terminal = "xterm-256color";
       keyMode = "vi";
       customPaneNavigationAndResize = true;
+      mouse = true;
 
       # Split and open in current directory.
       extraConfig = ''
         bind '"' split-window -c "#{pane_current_path}"
         bind % split-window -hc "#{pane_current_path}"
         # bind c new-window -c "#{pane_current_path}"
+
+        set-option -g set-titles on
       '';
 
       plugins = with pkgs; [
