@@ -28,7 +28,7 @@
     kubectl
     kubectx
     stern # Multi pod and container log tailing for Kubernetes
-    k9s
+    # k9s
     kubernetes-helm
     helm-docs
     kubelogin

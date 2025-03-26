@@ -27,6 +27,41 @@
       nix-direnv.enable = true;
     };
 
+    kubecolor = {
+      enable = true;
+      enableAlias = true;
+    };
+
+    k9s = {
+      enable = true;
+
+      plugin = {
+        plugins = {
+          json_pod_logs = {
+            shortCut = "Ctrl-L";
+            description = "JSON Pod logs";
+            scopes = [ "po" ];
+            command = "sh";
+            background = false;
+            confirm = false;
+            args = [
+              "-c"
+              ''
+              kubectl logs -f --context $CONTEXT --namespace $NAMESPACE $NAME | jq -SRr '
+                . as $line
+                | try (fromjson) catch $line
+                | "\(.time | split("T")[1] | split(".")[0]) " +
+                "\u001b[34m\(.level)\u001b[0m " +
+                "\u001b[36m\(.logger)\u001b[0m " +
+                "\(.msg)\n" +
+                (del(.time, .level, .logger, .msg, .source) | to_entries | map("\u001b[35m\(.key)=\u001b[0m\(.value|tostring)") | join(" ")) + "\n"'
+              ''
+            ];
+          };
+        };
+      };
+    };
+
     tmux = {
       enable = true;
       baseIndex = 1;

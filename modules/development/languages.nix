@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    go_1_22
+    go_1_24
 
     nodejs_22
 
@@ -11,3 +11,4 @@
     d2
   ];
 }
+

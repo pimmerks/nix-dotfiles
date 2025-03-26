@@ -14,7 +14,7 @@
     kubectl
     kubectx
     stern # Multi pod and container log tailing for Kubernetes
-    k9s
+    # k9s Installed by home-manager
     helm-docs
     kubelogin
     kustomize

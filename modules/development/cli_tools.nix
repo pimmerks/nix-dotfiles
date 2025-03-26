@@ -14,6 +14,8 @@
     # golang tools
     golangci-lint
     govulncheck
+    gofumpt
+    gotools
 
     # Tools
     gnumake

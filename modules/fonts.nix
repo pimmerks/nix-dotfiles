@@ -8,7 +8,9 @@
     then {
       packages = with pkgs; [
         font-awesome
-        (nerdfonts.override {fonts = ["Meslo" "FiraCode" "JetBrainsMono"];})
+        nerd-fonts.meslo-lg
+        nerd-fonts.fira-code
+        nerd-fonts.jetbrains-mono
       ];
     }
     else {
@@ -23,7 +25,10 @@
         noto-fonts-cjk
         noto-fonts-emoji
         font-awesome
-        (nerdfonts.override {fonts = ["Meslo" "FiraCode" "JetBrainsMono"];})
+        nerd-fonts.meslo-lg
+        nerd-fonts.fira-code
+        nerd-fonts.jetbrains-mono
       ];
     };
 }
+
