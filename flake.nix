@@ -50,8 +50,16 @@
   in {
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs {inherit pkgs;});
-
     formatter = forEachSystem (system: pkgs: stablePkgsFor.${system}.alejandra);
+    devShells = forEachSystem (system: pkgs: {
+      default = pkgs.mkShell {
+        buildInputs = [
+          pkgs.deadnix
+          pkgs.alejandra
+          pkgs.nix-search-cli
+        ];
+      };
+    });
 
     # New MBP M3 - Arm chip
     darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
