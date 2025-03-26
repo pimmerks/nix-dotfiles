@@ -1,5 +1,8 @@
-{ stdenv, pkgs, ... }:
-let
+{
+  stdenv,
+  pkgs,
+  ...
+}: let
   scriptName = "screenshot-copy";
 
   grimshot = "${pkgs.sway-contrib.grimshot}/bin/grimshot";
@@ -13,19 +16,19 @@ let
 
     ${wl-copy} < "$FILE"
   '';
+in
+  stdenv.mkDerivation {
+    name = scriptName;
+    src = script;
+    phases = "installPhase";
 
-in stdenv.mkDerivation {
-  name = scriptName;
-  src = script;
-  phases = "installPhase";
+    buildInputs = [
+      pkgs.sway-contrib.grimshot
+      pkgs.wl-clipboard
+    ];
 
-  buildInputs = [
-    pkgs.sway-contrib.grimshot
-    pkgs.wl-clipboard
-  ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
+    '';
+  }

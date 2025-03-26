@@ -87,7 +87,7 @@ in
       description = "Unofficial electron-based desktop client for Google Chat, electron included";
       homepage = "https://github.com/squalou/google-chat-linux";
       mainProgram = "google-chat-linux";
-#      license = licenses.unfree;
+      #      license = licenses.unfree;
       platforms = platforms.linux;
     };
   }

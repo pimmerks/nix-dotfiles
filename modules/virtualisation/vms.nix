@@ -1,7 +1,10 @@
-{ pkgs, user, ... }:
 {
+  pkgs,
+  user,
+  ...
+}: {
   # Add user to libvirtd group
-  users.users.${user}.extraGroups = [ "libvirtd" ];
+  users.users.${user}.extraGroups = ["libvirtd"];
 
   programs.dconf.enable = true;
   programs.virt-manager.enable = true;
@@ -23,7 +26,7 @@
       qemu = {
         swtpm.enable = true;
         ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        ovmf.packages = [pkgs.OVMFFull.fd];
       };
     };
   };

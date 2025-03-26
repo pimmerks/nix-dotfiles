@@ -1,5 +1,8 @@
-{ stdenv, pkgs, ... }:
-let
+{
+  stdenv,
+  pkgs,
+  ...
+}: let
   scriptName = "power-menu-rofi";
 
   awk = "${pkgs.gawk}/bin/awk";
@@ -27,22 +30,22 @@ let
         exec ${systemctl} poweroff -i;;
     esac
   '';
+in
+  stdenv.mkDerivation {
+    name = scriptName;
+    src = script;
+    phases = "installPhase";
 
-in stdenv.mkDerivation {
-  name = scriptName;
-  src = script;
-  phases = "installPhase";
+    buildInputs = [
+      pkgs.gawk
+      pkgs.rofi-wayland
+      pkgs.coreutils
+      pkgs.hyprland
+      pkgs.systemd
+    ];
 
-  buildInputs = [
-    pkgs.gawk
-    pkgs.rofi-wayland
-    pkgs.coreutils
-    pkgs.hyprland
-    pkgs.systemd
-  ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
+    '';
+  }

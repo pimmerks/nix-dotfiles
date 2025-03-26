@@ -1,5 +1,8 @@
-{ stdenv, pkgs, ... }:
-let
+{
+  stdenv,
+  pkgs,
+  ...
+}: let
   scriptName = "cliphist-rofi";
 
   cliphist = "${pkgs.cliphist}/bin/cliphist";
@@ -13,19 +16,19 @@ let
         ${cliphist} decode <<<"$1" | ${wl-copy}
     fi
   '';
+in
+  stdenv.mkDerivation {
+    name = scriptName;
+    src = script;
+    phases = "installPhase";
 
-in stdenv.mkDerivation {
-  name = scriptName;
-  src = script;
-  phases = "installPhase";
+    buildInputs = [
+      pkgs.cliphist
+      pkgs.wl-clipboard
+    ];
 
-  buildInputs = [
-    pkgs.cliphist
-    pkgs.wl-clipboard
-  ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
+    '';
+  }

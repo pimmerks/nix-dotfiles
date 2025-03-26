@@ -1,49 +1,54 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   # fromGithub can download a neovim plugin from Github.
   # For example: (fromGitHub "6422c3a651c3788881d01556cb2a90bdff7bf002" "master" "Shopify/shadowenv.vim")
-  fromGitHub = rev: ref: repo: pkgs.vimUtils.buildVimPlugin {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
-    version = ref;
-    src = builtins.fetchGit {
-      url = "https://github.com/${repo}.git";
-      inherit ref;
-      inherit rev;
+  fromGitHub = rev: ref: repo:
+    pkgs.vimUtils.buildVimPlugin {
+      pname = "${lib.strings.sanitizeDerivationName repo}";
+      version = ref;
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        inherit ref;
+        inherit rev;
+      };
     };
-  };
 
-  nvim-treesitter-with-plugins = pkgs.vimPlugins.nvim-treesitter.withPlugins (treesitter-plugins:
-    with treesitter-plugins; [
-      lua
-      c
-      vimdoc
+  nvim-treesitter-with-plugins = pkgs.vimPlugins.nvim-treesitter.withPlugins (
+    treesitter-plugins:
+      with treesitter-plugins; [
+        lua
+        c
+        vimdoc
 
-      bash
-      nix
-      make
-      markdown
-      sql
-      ssh_config
+        bash
+        nix
+        make
+        markdown
+        sql
+        ssh_config
 
-      python
+        python
 
-      go
-      gomod
-      gosum
-      gowork
+        go
+        gomod
+        gosum
+        gowork
 
-      tsx
-      typescript
-      javascript
-      vue
+        tsx
+        typescript
+        javascript
+        vue
 
-      yaml
-      json
-      terraform
-    ]
+        yaml
+        json
+        terraform
+      ]
   );
-in
-{
+in {
   programs.neovim = {
     enable = true;
 
@@ -72,13 +77,15 @@ in
         type = "lua";
       }
 
-      { # https://github.com/catppuccin/nvim
+      {
+        # https://github.com/catppuccin/nvim
         plugin = catppuccin-nvim;
         type = "lua";
         config = builtins.readFile ./plugins/catpuccin.lua;
       }
 
-      { # highly extendable fuzzy finder over lists. https://github.com/nvim-telescope/telescope.nvim
+      {
+        # highly extendable fuzzy finder over lists. https://github.com/nvim-telescope/telescope.nvim
         plugin = telescope-nvim;
         type = "lua";
         config = ''
@@ -215,70 +222,70 @@ in
         plugin = pkgs.emptyDirectory;
         type = "lua";
         config = ''
-        vim.api.nvim_create_autocmd("LspAttach", {
-          callback = function(args)
-            local bufnr = args.buf
-            local client = vim.lsp.get_client_by_id(args.data.client_id)
+          vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+              local bufnr = args.buf
+              local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-            local function opts(desc)
-              return { buffer = bufnr, desc = "LSP " .. desc .. "(" .. client.name .. ")" }
-            end
-            local map = vim.keymap.set
-
-            map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
-            map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
-            map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
-            map("n", "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
-            map("n", "<leader>h", vim.lsp.buf.hover, opts "Show hover text")
-            map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
-
-            map("n", "<leader>fm", vim.lsp.buf.format, opts "Format buffer")
-            map("n", "<leader>ar", vim.lsp.buf.rename, opts "Rename symbol")
-
-            map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
-            map("n", "gr", vim.lsp.buf.references, opts "Show references")
-
-            if client.name == "clangd" then
-              vim.keymap.set('n', 'gI', "<Cmd>ClangdSwitchSourceHeader<CR>", opts "Switch to Header file (clangd)")
-            end
-
-
-            -- Enable inlay hints if they are supported
-            local toggle_inlay_hints = function ()
-              local inlay_hint = vim.lsp.inlay_hint
-              if inlay_hint.is_enabled() then
-                inlay_hint.enable(false, nil)
-              else
-                inlay_hint.enable(true, nil)
+              local function opts(desc)
+                return { buffer = bufnr, desc = "LSP " .. desc .. "(" .. client.name .. ")" }
               end
-            end
+              local map = vim.keymap.set
 
-            if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
-              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-              map("n", "<leader>ti", toggle_inlay_hints, opts "Toggle inlay hints")
-            end
+              map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
+              map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
+              map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
+              map("n", "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
+              map("n", "<leader>h", vim.lsp.buf.hover, opts "Show hover text")
+              map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
 
-            -- Some other stuff that was in examples ?
-            if client.server_capabilities.completionProvider then
-              vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-            end
+              map("n", "<leader>fm", vim.lsp.buf.format, opts "Format buffer")
+              map("n", "<leader>ar", vim.lsp.buf.rename, opts "Rename symbol")
 
-            if client.server_capabilities.definitionProvider then
-              vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-            end
+              map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
+              map("n", "gr", vim.lsp.buf.references, opts "Show references")
+
+              if client.name == "clangd" then
+                vim.keymap.set('n', 'gI', "<Cmd>ClangdSwitchSourceHeader<CR>", opts "Switch to Header file (clangd)")
+              end
 
 
-            -- Attach CursorHold mode
-            -- vim.api.nvim_create_autocmd("CursorHold", {
-            --   callback = function(args)
-            --     if not require("cmp").visible() then
-            --       vim.lsp.buf.hover({focusable = false})
-            --     end
-            --   end
-            -- })
+              -- Enable inlay hints if they are supported
+              local toggle_inlay_hints = function ()
+                local inlay_hint = vim.lsp.inlay_hint
+                if inlay_hint.is_enabled() then
+                  inlay_hint.enable(false, nil)
+                else
+                  inlay_hint.enable(true, nil)
+                end
+              end
 
-          end,
-        })
+              if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                map("n", "<leader>ti", toggle_inlay_hints, opts "Toggle inlay hints")
+              end
+
+              -- Some other stuff that was in examples ?
+              if client.server_capabilities.completionProvider then
+                vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+              end
+
+              if client.server_capabilities.definitionProvider then
+                vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+              end
+
+
+              -- Attach CursorHold mode
+              -- vim.api.nvim_create_autocmd("CursorHold", {
+              --   callback = function(args)
+              --     if not require("cmp").visible() then
+              --       vim.lsp.buf.hover({focusable = false})
+              --     end
+              --   end
+              -- })
+
+            end,
+          })
 
         '';
       }

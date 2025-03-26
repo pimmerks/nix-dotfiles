@@ -21,11 +21,17 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-stable, nix-darwin, home-manager, hyprland }:
-  let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nix-stable,
+    nix-darwin,
+    home-manager,
+    hyprland,
+  }: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
-    systems = [ "x86_64-linux" "aarch64-darwin" ];
+    systems = ["x86_64-linux" "aarch64-darwin"];
 
     forEachSystem = f:
       lib.genAttrs systems (system: f system pkgsFor.${system});
@@ -43,7 +49,9 @@
       });
   in {
     inherit lib;
-    packages = forEachSystem (system: pkgs: import ./pkgs { inherit pkgs; });
+    packages = forEachSystem (system: pkgs: import ./pkgs {inherit pkgs;});
+
+    formatter = forEachSystem (system: pkgs: stablePkgsFor.${system}.alejandra);
 
     # New MBP M3 - Arm chip
     darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {

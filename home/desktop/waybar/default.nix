@@ -1,8 +1,11 @@
-{ config, self, pkgs, ... }:
-let
-  audio-output-changer = "${self.packages.${pkgs.system}.audio-output-changer}/bin/audio-output-changer";
-in
 {
+  config,
+  self,
+  pkgs,
+  ...
+}: let
+  audio-output-changer = "${self.packages.${pkgs.system}.audio-output-changer}/bin/audio-output-changer";
+in {
   programs.waybar = {
     enable = true;
     systemd = {
@@ -15,7 +18,7 @@ in
         layer = "top";
         position = "top";
 
-#        height = 49;
+        #        height = 49;
         spacing = 1;
         gtk-layer-shell = true;
 
@@ -91,7 +94,7 @@ in
           format = "{icon} {volume}%";
           format-muted = "󰖁 {volume}%";
           format-icons = {
-            default = ["󰕿" "󰖀" "󰕾" ];
+            default = ["󰕿" "󰖀" "󰕾"];
           };
           tooltip = true;
           tooltip-format = "{icon} {desc}";

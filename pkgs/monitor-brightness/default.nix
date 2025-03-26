@@ -1,5 +1,8 @@
-{ stdenv, pkgs, ... }:
-let
+{
+  stdenv,
+  pkgs,
+  ...
+}: let
   scriptName = "monitor-brightness";
 
   ddcutil = "${pkgs.ddcutil}/bin/ddcutil";
@@ -46,21 +49,21 @@ let
 
     ${notify-send} "Set brightness to $NEW_BRIGHTNESS" -t 1000
   '';
+in
+  stdenv.mkDerivation {
+    name = scriptName;
+    src = script;
+    phases = "installPhase";
 
-in stdenv.mkDerivation {
-  name = scriptName;
-  src = script;
-  phases = "installPhase";
+    buildInputs = [
+      pkgs.ddcutil
+      pkgs.gnugrep
+      pkgs.gawk
+      pkgs.libnotify
+    ];
 
-  buildInputs = [
-    pkgs.ddcutil
-    pkgs.gnugrep
-    pkgs.gawk
-    pkgs.libnotify
-  ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
+    '';
+  }

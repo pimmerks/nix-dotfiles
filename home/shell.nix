@@ -1,15 +1,17 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.home-manager.enable = true;
 
   # Packages that should be installed to the user profile.
   home.packages = [
     pkgs.zsh-autosuggestions
-    pkgs.fasd       # needed for 'z' jump-around
-    pkgs.ripgrep    # Faster grep
-    pkgs.fd         # Faster find
-    pkgs.bat        # Better cat
+    pkgs.fasd # needed for 'z' jump-around
+    pkgs.ripgrep # Faster grep
+    pkgs.fd # Faster find
+    pkgs.bat # Better cat
     pkgs.difftastic # Better diffing
     pkgs.pre-commit # Pre-commit hooks for git repositories
     pkgs.uv # Python package manager
@@ -40,21 +42,21 @@
           json_pod_logs = {
             shortCut = "Ctrl-L";
             description = "JSON Pod logs";
-            scopes = [ "po" ];
+            scopes = ["po"];
             command = "sh";
             background = false;
             confirm = false;
             args = [
               "-c"
               ''
-              kubectl logs -f --context $CONTEXT --namespace $NAMESPACE $NAME | jq -SRr '
-                . as $line
-                | try (fromjson) catch $line
-                | "\(.time | split("T")[1] | split(".")[0]) " +
-                "\u001b[34m\(.level)\u001b[0m " +
-                "\u001b[36m\(.logger)\u001b[0m " +
-                "\(.msg)\n" +
-                (del(.time, .level, .logger, .msg, .source) | to_entries | map("\u001b[35m\(.key)=\u001b[0m\(.value|tostring)") | join(" ")) + "\n"'
+                kubectl logs -f --context $CONTEXT --namespace $NAMESPACE $NAME | jq -SRr '
+                  . as $line
+                  | try (fromjson) catch $line
+                  | "\(.time | split("T")[1] | split(".")[0]) " +
+                  "\u001b[34m\(.level)\u001b[0m " +
+                  "\u001b[36m\(.logger)\u001b[0m " +
+                  "\(.msg)\n" +
+                  (del(.time, .level, .logger, .msg, .source) | to_entries | map("\u001b[35m\(.key)=\u001b[0m\(.value|tostring)") | join(" ")) + "\n"'
               ''
             ];
           };
@@ -172,7 +174,7 @@
           "aliases"
           "colored-man-pages"
           "command-not-found"
-#          "zsh-autosuggestions"
+          #          "zsh-autosuggestions"
           "nvm"
           "1password"
           "macos"

@@ -1,5 +1,10 @@
-{ config, self, pkgs, lib, ... }: {
-
+{
+  config,
+  self,
+  pkgs,
+  lib,
+  ...
+}: {
   env = [
     # Some default env vars.
     "XCURSOR_SIZE,24"
@@ -188,16 +193,16 @@
     volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
     playerctl = "${pkgs.playerctl}/bin/playerctl";
   in [
-      ", XF86AudioRaiseVolume, exec, ${volume-control} up"
-      ", XF86AudioLowerVolume, exec, ${volume-control} down"
-      ", XF86AudioMute,        exec, ${volume-control} mute"
+    ", XF86AudioRaiseVolume, exec, ${volume-control} up"
+    ", XF86AudioLowerVolume, exec, ${volume-control} down"
+    ", XF86AudioMute,        exec, ${volume-control} mute"
 
-      ", XF86AudioPlay, exec, ${playerctl} play-pause"
-      ", XF86AudioPrev, exec, ${playerctl} previous"
-      ", XF86AudioNext, exec, ${playerctl} next"
+    ", XF86AudioPlay, exec, ${playerctl} play-pause"
+    ", XF86AudioPrev, exec, ${playerctl} previous"
+    ", XF86AudioNext, exec, ${playerctl} next"
 
-      # Keychron K8 has a microphone button, that actually emits SUPER+C
-      "SUPER, C,        exec, ${volume-control} mutemic"
+    # Keychron K8 has a microphone button, that actually emits SUPER+C
+    "SUPER, C,        exec, ${volume-control} mutemic"
   ];
 
   # Keybindings
@@ -219,7 +224,7 @@
     "$mainMod, RETURN, exec, ${kitty}"
 
     # Try to mimick some kind of alt-tab, not working atm...
-#    "ALT, TAB, exec, rofi -show window -kb-accept-entry \"Tab,!Alt+Alt_L\" -kb-row-down \"Alt+Tab\" -selected-row 1 -kb-element-next \"Down\""
+    #    "ALT, TAB, exec, rofi -show window -kb-accept-entry \"Tab,!Alt+Alt_L\" -kb-row-down \"Alt+Tab\" -selected-row 1 -kb-element-next \"Down\""
     "ALT, TAB, cyclenext"
     "ALT, Tab, bringactivetotop"
 

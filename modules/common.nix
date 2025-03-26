@@ -1,5 +1,9 @@
-{ config, pkgs, user, ... }:
 {
+  config,
+  pkgs,
+  user,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true;
 
   users.users.${user}.shell = pkgs.zsh;
@@ -12,5 +16,4 @@
   programs.zsh = {
     enable = true;
   };
-
 }

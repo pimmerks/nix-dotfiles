@@ -1,9 +1,14 @@
-{ config, pkgs, user, ... }: {
+{
+  config,
+  pkgs,
+  user,
+  ...
+}: {
   # Bootloader.
   boot = {
-    supportedFilesystems = [ "ntfs" ];
-    initrd = { kernelModules = [ "nvidia" ]; };
-    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+    supportedFilesystems = ["ntfs"];
+    initrd = {kernelModules = ["nvidia"];};
+    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -25,9 +30,9 @@
         };
       };
 
-#      systemd-boot = {
-#        enable = true;
-#      };
+      #      systemd-boot = {
+      #        enable = true;
+      #      };
     };
   };
 }

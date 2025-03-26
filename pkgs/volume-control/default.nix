@@ -1,5 +1,8 @@
-{ stdenv, pkgs, ... }:
-let
+{
+  stdenv,
+  pkgs,
+  ...
+}: let
   scriptName = "volume-control";
 
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -47,19 +50,19 @@ let
       mutemic) muteMicrophone;;
     esac
   '';
+in
+  stdenv.mkDerivation {
+    name = scriptName;
+    src = script;
+    phases = "installPhase";
 
-in stdenv.mkDerivation {
-  name = scriptName;
-  src = script;
-  phases = "installPhase";
+    buildInputs = [
+      pkgs.libnotify
+      pkgs.pamixer
+    ];
 
-  buildInputs = [
-    pkgs.libnotify
-    pkgs.pamixer
-  ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-    install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm 744 $src/bin/${scriptName} $out/bin/${scriptName}
+    '';
+  }

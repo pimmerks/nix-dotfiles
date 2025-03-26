@@ -1,5 +1,8 @@
-{ user, pkgs, ... }:
 {
+  user,
+  pkgs,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -12,6 +15,6 @@
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = [ "${user}" ];
+    polkitPolicyOwners = ["${user}"];
   };
 }

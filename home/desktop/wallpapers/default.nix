@@ -1,5 +1,10 @@
-{ config, self, pkgs, lib, ... }:
-let
+{
+  config,
+  self,
+  pkgs,
+  lib,
+  ...
+}: let
   wallpapers = [
     ./nixos-wallpaper-catppuccin-mocha.png
     ./rolling-fog-left.jpg
@@ -9,8 +14,7 @@ let
   mkWallpaperDir = file: "${file}";
 
   preloads = builtins.map (w: mkWallpaperDir w) wallpapers;
-in
-{
+in {
   services.hyprpaper = {
     enable = true;
     settings = {

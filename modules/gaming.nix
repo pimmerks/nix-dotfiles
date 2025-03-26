@@ -1,6 +1,10 @@
-{ config, pkgs, user, homeDir, ... }:
 {
-
+  config,
+  pkgs,
+  user,
+  homeDir,
+  ...
+}: {
   programs = {
     gamemode.enable = true;
 

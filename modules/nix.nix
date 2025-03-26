@@ -1,7 +1,11 @@
-{ lib, inputs, ...}: {
+{
+  lib,
+  inputs,
+  ...
+}: {
   nix = {
     settings = {
-      trusted-users = [ "root" "@wheel" "@staff" ];
+      trusted-users = ["root" "@wheel" "@staff"];
       warn-dirty = false;
     };
 
@@ -10,6 +14,6 @@
       nixpkgs.flake = inputs.nixpkgs;
     };
 
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 }

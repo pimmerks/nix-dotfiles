@@ -1,5 +1,10 @@
-{ lib, self, config, pkgs, ... }:
-let
+{
+  lib,
+  self,
+  config,
+  pkgs,
+  ...
+}: let
   monitors = {
     left = "HDMI-A-2";
     right = "HDMI-A-1";
@@ -16,8 +21,7 @@ let
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   systemctl = "${pkgs.systemd}/bin/systemctl";
-in
-{
+in {
   imports = [
     ./mako.nix
     ./waybar
@@ -32,7 +36,7 @@ in
     package = pkgs.hyprland;
     systemd.enable = true;
 
-    settings = import ./hyprland-config.nix { inherit config self pkgs lib; };
+    settings = import ./hyprland-config.nix {inherit config self pkgs lib;};
   };
 
   programs.hyprlock = {
@@ -62,7 +66,8 @@ in
       ];
 
       label = [
-        { # Show time
+        {
+          # Show time
           monitor = "";
           text = "$TIME";
           color = "rgb(255, 255, 255)";
@@ -73,7 +78,8 @@ in
           shadow_passes = 2;
         }
 
-        { # Show date
+        {
+          # Show date
           monitor = "";
           text = "cmd[update:60000] date \"+%A - %F\"";
           color = "rgb(255, 255, 255)";
@@ -123,7 +129,7 @@ in
       settings = {
         general = {
           lock_cmd = "pgrep hyprlock || ${hyprlock}"; # avoid starting multiple hyprlock instances.
-          before_sleep_cmd = "${loginctl} lock-session";   # lock before suspend.
+          before_sleep_cmd = "${loginctl} lock-session"; # lock before suspend.
           after_sleep_cmd = "${hyprctl} dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
         };
 
