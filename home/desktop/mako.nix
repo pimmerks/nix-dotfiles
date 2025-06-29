@@ -7,18 +7,20 @@
 
   services.mako = {
     enable = true;
-    font = "Source Sans Pro Semi-Bold 10";
+    settings = {
+      font = "Source Sans Pro Semi-Bold 10";
 
-    padding = "10,10";
-    anchor = "top-right";
+      padding = "10,10";
+      anchor = "top-right";
 
-    defaultTimeout = 10000;
-    layer = "overlay";
+      default-timeout = 10000;
+      layer = "overlay";
 
-    # Colors https://github.com/catppuccin/mako/blob/main/src/latte
-    backgroundColor = "#eff1f5";
-    textColor = "#4c4f69";
-    borderColor = "#1e66f5";
-    progressColor = "over #ccd0da";
+      # Colors https://github.com/catppuccin/mako/blob/main/src/latte
+      background-color = "#eff1f5";
+      text-color = "#4c4f69";
+      border-color = "#1e66f5";
+      progress-color = "over #ccd0da";
+    };
   };
 }

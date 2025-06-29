@@ -47,6 +47,15 @@ hmnews: clean
 clean:
 	@rm -rf $(ROOT_DIR)/result
 
+.PHONY: gc
+gc: clean
+ifeq ($(UNAME), Darwin)
+  echo "Idk what to do"
+else ifeq ($(UNAME), Linux)
+	sudo nix-collect-garbage --delete-older-than 1d
+endif
+
+
 .PHONY: check
 check:
 	@echo "User:                $(USER)"
