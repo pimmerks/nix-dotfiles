@@ -8,9 +8,9 @@
     then {
       packages = with pkgs; [
         font-awesome
-        nerd-fonts.meslo-lg
-        nerd-fonts.fira-code
-        nerd-fonts.jetbrains-mono
+        meslo-lg
+        fira-code
+        jetbrains-mono
       ];
     }
     else {
@@ -22,12 +22,12 @@
         unifont
         noto-fonts-color-emoji
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-emoji
         font-awesome
-        nerd-fonts.meslo-lg
-        nerd-fonts.fira-code
-        nerd-fonts.jetbrains-mono
+        meslo-lg
+        fira-code
+        jetbrains-mono
       ];
     };
 }

@@ -2,8 +2,8 @@
   description = "My NixOS & MacOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nix-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -11,7 +11,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -24,7 +24,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    nix-stable,
+    nix-unstable,
     nix-darwin,
     home-manager,
     hyprland,
@@ -42,21 +42,23 @@
         config.allowUnfree = true;
       });
 
-    stablePkgsFor = lib.genAttrs systems (system:
-      import nix-stable {
+    unstablePkgsFor = lib.genAttrs systems (system:
+      import nix-unstable {
         inherit system;
         config.allowUnfree = true;
       });
   in {
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs {inherit pkgs;});
-    formatter = forEachSystem (system: pkgs: stablePkgsFor.${system}.alejandra);
+    formatter = forEachSystem (system: pkgs: pkgsFor.${system}.alejandra);
     devShells = forEachSystem (system: pkgs: {
       default = pkgs.mkShell {
         buildInputs = [
           pkgs.deadnix
           pkgs.alejandra
           pkgs.nix-search-cli
+          pkgs.git
+          pkgs.gnumake
         ];
       };
     });
@@ -78,7 +80,7 @@
       specialArgs = {
         user = "pimmer";
         inherit self inputs outputs;
-        stablePkgs = stablePkgsFor.aarch64-darwin;
+        unstablePkgs = unstablePkgsFor.aarch64-darwin;
       };
     };
 
@@ -90,8 +92,10 @@
       modules = [
         ./hosts/lin0/configuration.nix
 
-        ./modules/development
-        ./modules/jetbrains
+        ./modules/dev
+        ./modules/dev/python.nix
+
+        # ./modules/jetbrains
         ./modules/apps/spotify.nix
         ./modules/apps/discord.nix
         ./modules/apps/1password_cli.nix
@@ -112,6 +116,7 @@
       specialArgs = {
         user = "pimmer";
         inherit self inputs outputs;
+        unstablePkgs = unstablePkgsFor.x86_64-linux;
       };
     };
 
@@ -140,6 +145,7 @@
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit self inputs outputs;
+          unstablePkgs = unstablePkgsFor.x86_64-linux;
         };
         modules = [
           {
@@ -152,6 +158,7 @@
 
           ./home/shell.nix
           ./home/kitty.nix
+          ./home/git.nix
           ./home/neovim
           ./home/desktop
         ];

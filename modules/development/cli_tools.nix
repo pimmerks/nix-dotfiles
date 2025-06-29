@@ -1,15 +1,14 @@
 {
-  config,
   pkgs,
-  stablePkgs,
+  unstablePkgs,
   ...
 }: {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with unstablePkgs; [
     # VCS
-    stablePkgs.git
+    pkgs.git
 
     # Editors
     vim
@@ -75,7 +74,7 @@
 
     # Python
     ruff
-    ruff-lsp
+    #ruff-lsp
     pyright
   ];
 }

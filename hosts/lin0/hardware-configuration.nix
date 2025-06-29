@@ -34,11 +34,17 @@
     {device = "/dev/disk/by-uuid/35890a7f-446d-46f1-a913-33b8f8af1ad8";}
   ];
 
-  fileSystems."/mnt/windows" = {
-    device = "/dev/disk/by-uuid/6ABE472FBE46F35D";
-    fsType = "ntfs-3g";
-    options = ["rw" "uid=1000"];
+
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/19daae8e-4d9c-4ba6-89e6-9b24de726f21";
+    fsType = "ext4";
   };
+
+  #fileSystems."/mnt/windows" = {
+  #  device = "/dev/disk/by-uuid/6ABE472FBE46F35D";
+  #  fsType = "ntfs-3g";
+  #  options = ["rw" "uid=1000"];
+  #};
 
   fileSystems."/mnt/nas" = {
     device = "nas:/volume1/";

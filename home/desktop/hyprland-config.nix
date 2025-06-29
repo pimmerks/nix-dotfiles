@@ -81,7 +81,7 @@
     "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
     "col.inactive_border" = "rgba(595959aa)";
 
-    apply_sens_to_raw = 0;
+    # apply_sens_to_raw = 0;
     allow_tearing = true;
   };
 
@@ -98,10 +98,10 @@
       passes = 1;
     };
 
-    drop_shadow = true;
-    shadow_range = 4;
-    shadow_render_power = 3;
-    "col.shadow" = "rgba(1a1a1aee)";
+    #drop_shadow = true;
+    #shadow_range = 4;
+    #shadow_render_power = 3;
+    # "col.shadow" = "rgba(1a1a1aee)";
   };
 
   # blurls = "waybar";
@@ -123,11 +123,11 @@
   dwindle = {
     pseudotile = 1;
     preserve_split = 1;
-    no_gaps_when_only = 1;
+    # no_gaps_when_only = 1;
   };
 
   master = {
-    no_gaps_when_only = 1;
+    # no_gaps_when_only = 1;
   };
 
   misc = {

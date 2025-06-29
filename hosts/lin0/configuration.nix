@@ -102,6 +102,7 @@
     easyeffects
     solaar # Logitech mouse management
     pavucontrol # Controls for sound.
+    gparted
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

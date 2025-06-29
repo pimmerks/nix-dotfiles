@@ -3,6 +3,5 @@
 {
   programs.git = {
     enable = true;
-
   };
 }
