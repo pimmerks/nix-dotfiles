@@ -74,7 +74,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nix-stable"
         ]
       },
       "locked": {
@@ -415,7 +415,7 @@
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nix-stable"
         ]
       },
       "locked": {
