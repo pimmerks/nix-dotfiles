@@ -2,29 +2,29 @@
   description = "My NixOS & MacOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
-      inputs.nixpkgs.follows = "nix-stable";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nix-stable";
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
       url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nix-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
-    nix-stable,
+    nixpkgs-unstable,
     nix-darwin,
     home-manager,
     hyprland,
@@ -42,15 +42,15 @@
         config.allowUnfree = true;
       });
 
-    stablePkgsFor = lib.genAttrs systems (system:
-      import nix-stable {
+    unstablePkgsFor = lib.genAttrs systems (system:
+      import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       });
   in {
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs {inherit pkgs;});
-    formatter = forEachSystem (system: pkgs: stablePkgsFor.${system}.alejandra);
+    formatter = forEachSystem (system: pkgs: pkgsFor.${system}.alejandra);
 
     devShells = forEachSystem (system: pkgs: {
       default = pkgs.mkShell {
@@ -82,7 +82,7 @@
       specialArgs = {
         user = "pimmer";
         inherit self inputs outputs;
-        stablePkgs = stablePkgsFor.aarch64-darwin;
+        stablePkgs = pkgsFor.aarch64-darwin;
       };
     };
 
