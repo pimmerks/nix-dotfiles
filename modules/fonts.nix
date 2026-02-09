@@ -8,9 +8,9 @@
     then {
       packages = with pkgs; [
         font-awesome
-        nerd-fonts.meslo-lg
-        nerd-fonts.fira-code
-        nerd-fonts.jetbrains-mono
+        # nerd-fonts.meslo-lg
+        # nerd-fonts.fira-code
+        # nerd-fonts.jetbrains-mono
       ];
     }
     else {

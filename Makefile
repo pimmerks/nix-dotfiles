@@ -25,11 +25,7 @@ build: clean
 
 .PHONY: switch
 switch: clean
-ifeq ($(UNAME), Darwin)
-	$(REBUILD_CMD) switch --flake $(FLAKE)
-else ifeq ($(UNAME), Linux)
 	sudo $(REBUILD_CMD) switch --flake $(FLAKE)
-endif
 
 .PHONY: hmbuild
 hmbuild: clean

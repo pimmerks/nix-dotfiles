@@ -9,10 +9,10 @@
       warn-dirty = false;
     };
 
-    # Use the same registry as our flake inputs.
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-    };
+    # # Use the same registry as our flake inputs.
+    # registry = {
+    #   nixpkgs.flake = inputs.nixpkgs;
+    # };
 
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };

@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     # VCS
     stablePkgs.git
+    nh
 
     # Editors
     vim
@@ -54,6 +55,7 @@
     # CLI
     glab # Gitlab cli
     awscli2 # AWS
+    aws-iam-authenticator # AWS
     gh
     dapr-cli
     supabase-cli
@@ -61,12 +63,11 @@
     azure-cli
 
     # Terraform
-    terraform
-    terraform-docs
+    # terraform-docs
     opentofu
 
     # OPA
-    open-policy-agent
+    # open-policy-agent
 
     # Ansible
     ansible
@@ -75,7 +76,6 @@
 
     # Python
     ruff
-    ruff-lsp
     pyright
   ];
 }

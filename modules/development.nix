@@ -13,7 +13,6 @@
     ### Languages
 
     # Golang
-    go_1_21
     golangci-lint
     goose
 
@@ -52,7 +51,6 @@
     kustomize
 
     # Terraform
-    terraform
     terraform-docs
 
     # Ansible

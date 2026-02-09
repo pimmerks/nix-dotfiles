@@ -23,6 +23,7 @@
     kustomize
 
     # Local kubernetes on docker
-    kind
+    # kind
+    # kuttl
   ];
 }

@@ -3,21 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nix-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+      inputs.nixpkgs.follows = "nix-stable";
     };
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nix-stable";
     };
 
     hyprland = {
       url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nix-stable";
     };
   };
 
@@ -51,18 +51,22 @@
     inherit lib;
     packages = forEachSystem (system: pkgs: import ./pkgs {inherit pkgs;});
     formatter = forEachSystem (system: pkgs: stablePkgsFor.${system}.alejandra);
+
     devShells = forEachSystem (system: pkgs: {
       default = pkgs.mkShell {
         buildInputs = [
           pkgs.deadnix
           pkgs.alejandra
           pkgs.nix-search-cli
+          pkgs.nix-output-monitor
+          pkgs.nh
+          pkgs.home-manager
         ];
       };
     });
 
     # New MBP M3 - Arm chip
-    darwinConfigurations."Pims-MBP" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."AA2134-Pims-MBP" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./hosts/Pims-MBP/configuration.nix
@@ -116,7 +120,7 @@
     };
 
     homeConfigurations = {
-      "pimmer@Pims-MBP" = home-manager.lib.homeManagerConfiguration {
+      "pimmer@AA2134-Pims-MBP" = home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsFor.aarch64-darwin;
         extraSpecialArgs = {
           inherit self inputs outputs;
@@ -130,9 +134,10 @@
             };
           }
 
-          ./home/shell.nix
-          ./home/kitty.nix
           ./home/neovim
+          ./home/kitty.nix
+          ./home/packages.nix
+          ./home/shell.nix
         ];
       };
 

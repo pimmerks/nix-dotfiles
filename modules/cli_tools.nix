@@ -37,7 +37,6 @@
     kustomize
 
     # Terraform
-    terraform
-    terraform-docs
+    # terraform-docs
   ];
 }

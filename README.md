@@ -15,6 +15,7 @@ make switch
 ```
 
 ## Home Manager
+
 ```shell
 # Build the flake to ./result
 make hmbuild

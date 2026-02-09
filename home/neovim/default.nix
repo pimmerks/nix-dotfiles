@@ -45,7 +45,6 @@
 
         yaml
         json
-        terraform
       ]
   );
 in {
@@ -200,6 +199,12 @@ in {
           local capabilities = require('cmp_nvim_lsp').default_capabilities()
         '';
       }
+      {
+        plugin = trouble-nvim;
+        type = "lua";
+        config = ''
+        '';
+      }
 
       {
         plugin = mason-lspconfig-nvim;
@@ -208,13 +213,13 @@ in {
           local mason_lspconfig = require("mason-lspconfig")
           mason_lspconfig.setup()
 
-          mason_lspconfig.setup_handlers {
-            function (server_name) -- default handler (optional)
-              require("lspconfig")[server_name].setup {
-                capabilities = capabilities,
-              }
-            end,
-          }
+          -- mason_lspconfig.setup_handlers {
+          --   function (server_name) -- default handler (optional)
+          --     require("lspconfig")[server_name].setup {
+          --       capabilities = capabilities,
+          --     }
+          --   end,
+          -- }
         '';
       }
 
