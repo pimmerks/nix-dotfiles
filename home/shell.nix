@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  unstablePkgs,
   ...
 }: {
   programs.home-manager.enable = true;
@@ -11,6 +12,7 @@
     };
 
     direnv = {
+      package = unstablePkgs.direnv;
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;

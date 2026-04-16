@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  unstablePkgs,
   ...
 }: {
   # Packages that should be installed to the user profile.
@@ -15,8 +16,8 @@
     pkgs.uv # Python package manager
     pkgs.minio-client # S3 cli client
     pkgs.nom # RSS Feed Reader
-    pkgs.pnpm
-    pkgs.claude-code # Claude Code
-    pkgs.opencode
+    # pkgs.claude-code # Claude Code
+    unstablePkgs.opencode # OpenCode
+    pkgs.bun # Bun (nodejs runtime)
   ];
 }
