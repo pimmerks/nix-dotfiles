@@ -16,7 +16,7 @@
     pkgs.uv # Python package manager
     pkgs.minio-client # S3 cli client
     pkgs.nom # RSS Feed Reader
-    # pkgs.claude-code # Claude Code
+    unstablePkgs.claude-code # Claude Code
     unstablePkgs.opencode # OpenCode
     pkgs.bun # Bun (nodejs runtime)
   ];
