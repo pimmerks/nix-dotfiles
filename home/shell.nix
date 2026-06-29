@@ -6,6 +6,11 @@
 }: {
   programs.home-manager.enable = true;
 
+  # Add .local/bin to path for `uv tool`
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   programs = {
     command-not-found = {
       enable = true;
