@@ -19,5 +19,9 @@
     unstablePkgs.claude-code # Claude Code
     unstablePkgs.opencode # OpenCode
     pkgs.bun # Bun (nodejs runtime)
+    unstablePkgs.talosctl
+    unstablePkgs.cloudflared
+    unstablePkgs.cloudflare-cli
+    pkgs.dotnet-sdk
   ];
 }
