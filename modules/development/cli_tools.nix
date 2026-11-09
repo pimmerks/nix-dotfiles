@@ -42,7 +42,6 @@
     watch
     htop
     killall
-    neofetch
     fzf
     unzip
     gotop

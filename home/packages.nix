@@ -22,6 +22,6 @@
     unstablePkgs.talosctl
     unstablePkgs.cloudflared
     unstablePkgs.cloudflare-cli
-    pkgs.dotnet-sdk
+    pkgs.dotnet-sdk_10
   ];
 }
