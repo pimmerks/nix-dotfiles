@@ -6,18 +6,18 @@
 }: let
   # If this is a darwin system, use `cmd`, else use `ctrl+shift`.
   kitty_mod_key =
-    if lib.strings.hasSuffix "darwin" pkgs.system
+    if lib.strings.hasSuffix "darwin" pkgs.stdenv.hostPlatform.system
     then "cmd"
     else "ctrl+shift";
 
   # If this is a darwin system, we need a bigger font.
   kitty_font_size =
-    if lib.strings.hasSuffix "darwin" pkgs.system
+    if lib.strings.hasSuffix "darwin" pkgs.stdenv.hostPlatform.system
     then "16.0"
     else "11.0";
 
   extra_pkgs =
-    if lib.strings.hasSuffix "darwin" pkgs.system
+    if lib.strings.hasSuffix "darwin" pkgs.stdenv.hostPlatform.system
     then [pkgs.terminal-notifier]
     else [];
 in {

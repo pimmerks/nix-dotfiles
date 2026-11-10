@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  audio-output-changer = "${self.packages.${pkgs.system}.audio-output-changer}/bin/audio-output-changer";
+  audio-output-changer = "${self.packages.${pkgs.stdenv.hostPlatform.system}.audio-output-changer}/bin/audio-output-changer";
 in {
   programs.waybar = {
     enable = true;

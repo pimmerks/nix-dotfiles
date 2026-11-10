@@ -57,11 +57,16 @@ in {
     vimAlias = true;
     vimdiffAlias = true;
 
+    # No plugins rely on the Ruby or Python providers.
+    withRuby = false;
+    withPython3 = false;
+
     plugins = with pkgs.vimPlugins; [
       # This fixes a bug where config did not get put on top of the init.vim file.
       {
         plugin = pkgs.emptyDirectory;
         config = builtins.readFile ./config.vim;
+        type = "viml";
       }
 
       {

@@ -190,7 +190,7 @@
 
   # Keybindings even when locked
   bindl = let
-    volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
+    volume-control = "${self.packages.${pkgs.stdenv.hostPlatform.system}.volume-control}/bin/volume-control";
     playerctl = "${pkgs.playerctl}/bin/playerctl";
   in [
     ", XF86AudioRaiseVolume, exec, ${volume-control} up"
@@ -214,11 +214,11 @@
     playerctl = "${pkgs.playerctl}/bin/playerctl";
     rofi = "${pkgs.rofi-wayland}/bin/rofi";
 
-    screenshot-copy = "${self.packages.${pkgs.system}.screenshot-copy}/bin/screenshot-copy";
-    volume-control = "${self.packages.${pkgs.system}.volume-control}/bin/volume-control";
-    cliphist-rofi = "${self.packages.${pkgs.system}.cliphist-rofi}/bin/cliphist-rofi";
-    power-menu-rofi = "${self.packages.${pkgs.system}.power-menu-rofi}/bin/power-menu-rofi";
-    monitor-brightness = "${self.packages.${pkgs.system}.monitor-brightness}/bin/monitor-brightness";
+    screenshot-copy = "${self.packages.${pkgs.stdenv.hostPlatform.system}.screenshot-copy}/bin/screenshot-copy";
+    volume-control = "${self.packages.${pkgs.stdenv.hostPlatform.system}.volume-control}/bin/volume-control";
+    cliphist-rofi = "${self.packages.${pkgs.stdenv.hostPlatform.system}.cliphist-rofi}/bin/cliphist-rofi";
+    power-menu-rofi = "${self.packages.${pkgs.stdenv.hostPlatform.system}.power-menu-rofi}/bin/power-menu-rofi";
+    monitor-brightness = "${self.packages.${pkgs.stdenv.hostPlatform.system}.monitor-brightness}/bin/monitor-brightness";
   in [
     "$mainMod, Q, killactive,"
     "$mainMod, RETURN, exec, ${kitty}"

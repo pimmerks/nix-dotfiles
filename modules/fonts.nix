@@ -4,7 +4,7 @@
   ...
 }: {
   fonts =
-    if lib.strings.hasSuffix "darwin" pkgs.system
+    if lib.strings.hasSuffix "darwin" pkgs.stdenv.hostPlatform.system
     then {
       packages = with pkgs; [
         font-awesome
